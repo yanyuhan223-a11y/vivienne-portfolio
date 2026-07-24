@@ -267,6 +267,10 @@
         }
         footer p { font-size: 14px; }
 
+        .coding-card .video-fs-btn { display: none; }
+        .coding-card video::-webkit-media-controls-fullscreen-button { display: none; }
+        .coding-card video::-webkit-media-controls { overflow: hidden !important; }
+
         [] {
             outline: 2px dashed transparent;
             padding: 4px;
@@ -706,19 +710,19 @@
                 <h3 class="other-title">Coding</h3>
                 <div style="display: flex; gap: 16px; align-items: flex-end;">
                     <div>
-                        <div class="video-item" style="display: flex; flex-direction: column;">
-                            <video style="width: auto; height: 240px; object-fit: contain;" preload="metadata"><source src="assets/%E5%BD%95%E5%B1%8F2026-07-22%2016.33.01.mp4" type="video/quicktime"><source src="assets/%E5%BD%95%E5%B1%8F2026-07-22%2016.33.01.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-item coding-card" style="display: flex; flex-direction: column;">
+                            <video style="width: auto; height: 240px; object-fit: contain;" preload="metadata" controls playsinline><source src="assets/%E5%BD%95%E5%B1%8F2026-07-22%2016.33.01.mp4" type="video/quicktime"><source src="assets/%E5%BD%95%E5%B1%8F2026-07-22%2016.33.01.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
                             <div class="video-label">连连看</div>
                         </div>
                     </div>
                     <div>
-                        <div class="video-item" style="display: flex; flex-direction: column;">
-                            <video style="width: auto; height: 240px; object-fit: contain;"><source src="assets/20260722-190035.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-item coding-card" style="display: flex; flex-direction: column;">
+                            <video style="width: auto; height: 240px; object-fit: contain;" controls playsinline><source src="assets/20260722-190035.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
                             <div class="video-label">Galegame</div>
                         </div>
                     </div>
                     <div>
-                        <div class="video-item" style="display: flex; flex-direction: column; background: #fff;">
+                        <div class="video-item coding-card" style="display: flex; flex-direction: column;">
                             <img src="assets/coding%20%E5%B7%A5%E5%85%B7%E9%A1%B5.png" style="width: auto; height: 240px; object-fit: contain; display: block;">
                             <div class="video-label">工具页</div>
                         </div>
@@ -846,7 +850,7 @@
                         v.playsInline = true;
                         v.style.cursor = 'default';
                     }
-                    if (!item.querySelector('.video-fs-btn')) {
+                    if (!item.querySelector('.video-fs-btn') && !item.classList.contains('coding-card')) {
                         const btn = document.createElement('button');
                         btn.type = 'button';
                         btn.className = 'video-fs-btn';
