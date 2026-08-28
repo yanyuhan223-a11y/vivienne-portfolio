@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,16 +22,40 @@
             color: #c4302b;
             font-weight: 700;
         }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.7;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
+        /* ---- sticky nav ---- */
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.82);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 960px; margin: 0 auto; padding: 0 24px;
+            height: 56px; display: flex; align-items: center; gap: 4px;
+            overflow-x: auto; scrollbar-width: none;
+        }
+        .nav-inner::-webkit-scrollbar { display: none; }
+        .nav-brand { font-weight: 700; font-size: 15px; margin-right: auto; white-space: nowrap; letter-spacing: .3px; }
+        .nav a {
+            font-size: 13px; color: var(--text-light); text-decoration: none;
+            padding: 6px 12px; border-radius: 999px; white-space: nowrap;
+            transition: background .2s ease, color .2s ease;
+        }
+        .nav a:hover { background: #fef2f2; color: var(--accent); }
         .hero {
             background: #ffffff;
             color: #1a1a1a;
-            padding: 60px 24px 40px;
+            padding: 48px 24px 96px;
             text-align: center;
             margin-top: 0;
         }
@@ -62,12 +87,13 @@
         }
         .resume-grid span:first-child { opacity: 0.8; font-weight: 500; }
         .resume-grid span:last-child { font-weight: 600; }
-        .container { max-width: 960px; margin: -60px auto 0; padding: 0 24px; position: relative; z-index: 10; }
+        .container { max-width: 960px; margin: -72px auto 0; padding: 0 24px; position: relative; z-index: 10; }
         .section {
             background: var(--card);
             border-radius: 24px;
-            padding: 48px;
+            padding: 48px 44px;
             margin-bottom: 32px;
+            scroll-margin-top: 72px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
             position: relative;
         }
@@ -81,6 +107,8 @@
             font-size: 26px;
             color: var(--primary);
             font-weight: 700;
+            letter-spacing: .2px;
+            line-height: 1.4;
         }
         .section-header::after {
             content: '';
@@ -118,12 +146,16 @@
             padding: 24px;
             margin-bottom: 24px;
         }
+        .project-info { line-height: 1.8; }
         .project-info h4 {
-            font-size: 14px;
+            font-size: 14.5px;
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
+        .project-info h4 + h4 { margin-top: 12px; }
+        .project-info h4:last-child { margin-bottom: 0; }
+        .project-info strong { color: var(--primary); }
         .project-info p {
             font-size: 14px;
             color: #4b5563;
@@ -131,7 +163,8 @@
         }
         .project-info p:last-child { margin-bottom: 0; }
         .project-info ul { padding-left: 20px; margin-top: 8px; }
-        .project-info li { font-size: 14px; color: #4b5563; margin-bottom: 6px; }
+        .project-info li { font-size: 14px; color: #4b5563; margin-bottom: 8px; }
+        .project-info li:last-child { margin-bottom: 0; }
         .project-info blockquote {
             border-left: 4px solid var(--accent);
             padding: 12px 16px;
@@ -146,6 +179,7 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
+            align-items: start;
         }
         .img-item {
             border-radius: 16px;
@@ -171,6 +205,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             margin-bottom: 24px;
+            align-items: start;
         }
         .video-group-1 {
             display: grid;
@@ -223,9 +258,9 @@
         }
         .highlight li { font-size: 14px; color: #4b5563; margin-bottom: 8px; }
         .divider {
-            height: 2px;
+            height: 1px;
             background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 48px 0;
+            margin: 44px 0;
         }
         .other-title {
             font-size: 16px;
@@ -251,12 +286,15 @@
             cursor: zoom-in;
         }
         .gallery-item:hover { transform: scale(1.05); }
-        .gallery-item img { width: 100%; height: 140px; object-fit: cover; display: block; }
+        .gallery-item img { width: 100%; height: 160px; object-fit: cover; display: block; }
         .section-title-3 {
             font-size: 16px;
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 16px;
+            margin: 4px 0 16px;
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+            line-height: 1.4;
         }
         footer {
             background: var(--text);
@@ -270,26 +308,6 @@
         .coding-card .video-fs-btn { display: none; }
         .coding-card video::-webkit-media-controls-fullscreen-button { display: none; }
         .coding-card video::-webkit-media-controls { overflow: hidden !important; }
-
-        [] {
-            outline: 2px dashed transparent;
-            padding: 4px;
-            border-radius: 4px;
-            cursor: text;
-        }
-        []:hover {
-            outline-color: rgba(196, 48, 43, 0.3);
-            background: rgba(196, 48, 43, 0.04);
-        }
-        []:focus {
-            outline-color: var(--primary);
-            background: rgba(196, 48, 43, 0.08);
-        }
-        [].editing {
-            outline-color: var(--selected);
-            background: rgba(251, 191, 36, 0.1);
-        }
-        @media (max-width: 768px) {
     
         /* ==== v7: video-only interactions ==== */
         .video-item { position: relative; }
@@ -330,145 +348,113 @@
         .img-item, .img-full, .gallery-item { cursor: default; }
         .hero .card-img { cursor: default; }
 
+
+        /* ==== responsive ==== */
+        @media (max-width: 900px) {
+            .section { padding: 36px 28px; border-radius: 20px; }
+            .video-group-3 { grid-template-columns: repeat(2, 1fr); }
+            .coding-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 640px) {
+            .hero { padding: 24px 16px 64px; }
+            .container { max-width: 100%; margin-top: -44px; padding: 0 14px; }
+            .section { padding: 26px 18px; margin-bottom: 20px; border-radius: 16px; }
+            .section-header { margin-bottom: 26px; padding-bottom: 16px; }
+            .section-header h2 { font-size: 19px; }
+            .project { margin-bottom: 40px; }
+            .project-title { font-size: 18px; }
+            .project-info { padding: 18px; border-radius: 12px; }
+            .highlight { padding: 18px; border-radius: 12px; }
+            .img-group, .video-group, .video-group-3 { grid-template-columns: 1fr; }
+            .coding-grid { grid-template-columns: 1fr !important; }
+            .gallery-group { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .divider { margin: 32px 0; }
+            .nav-inner { padding: 0 14px; height: 50px; }
+            .nav-brand { font-size: 14px; }
+            footer { padding: 36px 20px; }
+        }
+        @media print {
+            .nav { display: none; }
+            .section { box-shadow: none; border: 1px solid var(--border); break-inside: avoid; }
+            .video-fs-btn { display: none; }
+        }
     </style>
 </head>
 <body>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <span class="nav-brand">Vivienne · Portfolio 2026</span>
+            <a href="#exp-bytedance">ByteDance</a>
+            <a href="#exp-bondee">BONDEE</a>
+            <a href="#exp-meitu">Meitu</a>
+            <a href="#exp-other">Other</a>
+        </div>
+    </nav>
 
     <div class="hero">
         <img class="card-img" src="assets/hero-card.png">
     </div>
 
     <div class="container" id="main-container">
-        <section class="section">
+        <section class="section" id="exp-bytedance">
             <div class="section-header">
                 <h2>AI Designer | ByteDance | 2023–2026</h2>
             </div>
 
             <div class="project" draggable="true">
-                <span class="project-tag">核心项目</span>
-                <h3 class="project-title">轻颜/抖音 AI 写真（2023-2024）</h3>
+                <span class="project-tag">创新项目</span>
+                <h3 class="project-title">随变 AI（2026）</h3>
                 <div class="project-info">
-                    <h4>背景：轻颜AI写真项目于23年7月立项，11/3上线，11/20开始陆续推广，是公司首个带有分身的真人AI生成玩法。</h4>
+                    <h4>链路搭建：聚焦 "OC 原创角色" 这一核心业务方向，端到端构建 "角色创建 → 角色资产沉淀 → 角色创作" 全流程能力，分模块打通用户从创建到消费的完整链路。</h4>
                     
-                    <h4>成果：公司首个真人 AI 玩法 —— 端内拉新完成度 <span class="data-red">900%</span>、DNU 环比 <span class="data-red">+28%</span>、主话题 VV <span class="data-red">3.1 亿</span>、累计拉新拉活 <span class="data-red">1500 万 +</span>; 口碑超越妙鸭等竞品；App Store 免费榜 <span class="data-red">73 → 17</span>。</h4>
-                    
-                    <h4>主要职责：定义目标效果，从 0-1 跑通 AI 形象链路，主攻 ID 保持痛点，统筹数据打标、风格打磨与模型训练全流程。</h4>
-                    
-                </div>
-
-                <h4 class="section-title-3">产品链路</h4>
-                <div class="img-group">
-                    <div class="img-item">
-                        <img src="assets/截屏2026-07-22%2015.35.16.png" alt="">
-                    </div>
-                    
-                    
-                </div>
-
-                <h4 class="section-title-3">效果打磨与沉淀 SOP</h4>
-                <div class="highlight">
+                    <h4>主要职责：</h4>
                     <ul>
-                        <li><strong>用户相似度：</strong>WebUI 搭建全链路，优化分身与风格 LoRA、利用 IP-Adapter 将身份特征注入，和 ControlNet 配合，锁定角色的 IP 外观和人物长相。</li>
-                        <li><strong>写真风格：</strong>聚焦胶片风格，还原胶片系列的色调、质感、光圈，人物情绪、姿态等，通过效果突破刺激用户的视觉体验与新鲜感，最终达成爆款出圈。</li>
-                        <li><strong>SOP沉淀：</strong>轻颜 AI 写真作为自研全新链路首次在业务中落地，在效果上线后，同步梳理制定了真人 LORA 的制作标准，建立起轻颜 AI 写真 SOP，为后续 AI 形象进抖音打下良好基础。</li>
+                        <li><strong>效果定义：</strong>完成 OC 创作 Onepage 效果标准，角色设定、监修注入创作，图像与视频能力结合，持续挖掘高消费表达内容，打造爆款玩法。</li>
+                        <li><strong>Agent 共建：</strong>基于对话式交互，定义触发时机、意图分流，约定上下游 Agent 输入与输出格式，参与全链路 Agent 意图识别与上下文记忆存储模块的方案设计与联调。</li>
+                        <li><strong>Skill 编排：</strong>基于 Skill 体系封装角色创建、资产管理、创作生图等能力模块，通过 Prompt 工程化 + Skill 触发规则设计，实现 Agent 对多场景任务的自动路由与稳定调用。</li>
+                        <li><strong>Coding 提效：</strong>编写 Python / 前端脚本完成数据处理、批量生图调试、效果 Prompt 自动化验证与链路联调，显著提升迭代效率，降低对研发排期依赖。</li>
                     </ul>
                 </div>
+
+                <h4 class="section-title-3">产品流程设计</h4>
                 <div class="img-full">
-                    <img src="assets/7月22日%281%29.gif" alt="">
+                    <img src="assets/截屏2026-07-22%2017.49.24.png" alt="">
                 </div>
 
-                <h4 class="section-title-3">口碑出圈与影响力</h4>
-                <p style="font-size:14px;color:#4b5563;margin-bottom:16px;">轻颜AI写真相关话题 #这个胶片的杀伤力不亚于初恋、#看看你的AI美式学院照，分别登上抖音挑战榜 TOP1、抖音热榜 TOP1。引发评论区跟风晒图持续带动跟投，用户口碑表现佳，整体超出预期。</p>
+                <h4 class="section-title-3">效果 Agent 框架</h4>
                 <div class="img-full">
-                    <img src="assets/7月22日%282%29.gif" alt="">
+                    <img src="assets/flowchart-animation%20(1).gif" alt="" style="width: 100%; height: auto;">
                 </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="project" draggable="true">
-                <span class="project-tag">特效玩法</span>
-                <h3 class="project-title">AI 音乐（2024-2025）</h3>
-                <div class="project-info">
-                    <h4>背景：预期通过AI音乐生成能力拓展 AI 特效的品类及玩法，以新的交互方式降低用户创作门槛，促进用户创意表达，带动投稿和内容消费价值的提高。</h4>
-                    
-                    <h4>成果：跑通 AI 音乐生成全链路，「AI 我的新年单曲」达成年轻 <span class="data-red">S-</span>、消费 <span class="data-red">S- 爆款</span></h4>
-                    
-                    <h4>主要职责：特效交互与内容设计，编写 PE 把控 AI 生成音乐与歌词质量</h4>
-                    
-                    <ul>
-                        <li><strong>降低创作门槛：</strong>通过图片投稿切入，提供命题制定方式降低文本创作难度</li>
-                        <li><strong>歌词要素分类：</strong>按 场景 / 主题 / 事件 / 情感 / 人物 五大分类，以内容识别替代文本输入，丰富歌词内容</li>
-                        <li><strong>玩法包装：</strong>采用音乐专辑的形式，多图上传 + 黑胶唱片包装形式，突出音乐原创</li>
-                    </ul>
-                    <blockquote>洞察热点反哺特效，同年 AI 歌曲"还我妈生鼻"爆火，我们将 "音" 引入 "文、图、视频" 的生成链路，通过<strong>歌曲创作</strong>和<strong>音色克隆</strong>两大方向拓展 AI 特效品类，降低用户创作门槛，带动投稿与内容消费。</blockquote>
-                </div>
-
+                <h4 class="section-title-3">AI 效果设计</h4>
                 <div class="img-group">
                     <div class="img-item">
-                        <img src="assets/截屏2026-07-22%2016.27.07.png" alt="">
+                        <img src="assets/3比4.png" alt="">
                     </div>
-                    <div class="img-item">
-                        <img src="assets/截屏2026-07-22%2016.06.42.png" alt="">
-                    </div>
-                </div>
-
-                <h4 class="section-title-3">效果展示</h4>
-                <div class="img-group">
                     
-                    <div class="img-item">
-                        <img src="assets/11.jpg" alt="">
-                    </div>
+                    
+                    
                 </div>
-                <div class="video-group">
+                <div class="video-group-1">
                     <div class="video-item">
-                        <video style="width: 100%; height: auto; object-fit: contain;" preload="metadata"><source src="assets/ScreenRecording_01-07-2025 15-56-24_1.mp4" type="video/quicktime"><source src="assets/ScreenRecording_01-07-2025 15-56-24_1.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
-                        <div class="video-label">演示视频 1</div>
+                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/ba%E7%94%9F%E6%88%902.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-label">成片</div>
                     </div>
-                    
-                    <div class="video-item">
-                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/20250106-193301.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
-                        <div class="video-label">演示视频 2</div>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="project" draggable="true">
-                <span class="project-tag">特效玩法</span>
-                <h3 class="project-title">AI 风格化（2024-2025）</h3>
-                <div class="project-info">
-                    <h4>背景：丰富抖音特效生态，产出高质量风格化特效带动投稿</h4>
-                    
-                    <h4>成果：「彩铅风」达成大盘 <span class="data-red">A 级</span>投稿爆款、消费 <span class="data-red">S- 级爆款</span></h4>
-                    
-                    <h4>主要职责：完成风格目标效果定义，独立搭建效果生成链路，LoRA 数据优化，分场景精细调参，高效高标准把控效果上线</h4>
-                    
-                </div>
-
-                <h4 class="section-title-3">基础 workflow 搭建</h4>
-                <div class="img-full">
-                    <img src="assets/截屏2026-07-22%2018.56.49.png" alt="">
-                </div>
-
-                <h4 class="section-title-3">效果展示</h4>
-                <div class="img-full">
-                    <img src="assets/截屏2026-07-22%2017.03.45.png" alt="">
-                </div>
-                <div class="video-group">
-                    <div class="video-item">
-                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/7%E6%9C%8822%E6%97%A5%288%29.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
-                        <div class="video-label">彩铅风演示 1</div>
-                    </div>
-                    <div class="video-item">
-                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/7%E6%9C%8822%E6%97%A5%287%29.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
-                        <div class="video-label">彩铅风演示 2</div>
-                    </div>
-                    
                 </div>
                 
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="project" draggable="true">
+                <span class="project-tag">策略研究</span>
+                <h3 class="project-title">模型评测（2025-2026）</h3>
+                <div class="project-info">
+                    <p>横向对比测评市面上多款模型与自研模型，输出可决策的测评报告与技术选型建议；建立多维评测标准与 MOS 打分示例。通过扩充样本总量并提升线上真实数据占比，深度支撑各场景业务效果精准评估。</p>
+                </div>
+                <div class="img-full">
+                    <img src="assets/截屏2026-07-22%2018.36.57.png" alt="">
+                </div>
             </div>
 
             <div class="divider"></div>
@@ -549,62 +535,134 @@
             <div class="divider"></div>
 
             <div class="project" draggable="true">
-                <span class="project-tag">策略研究</span>
-                <h3 class="project-title">模型评测（2025-2026）</h3>
+                <span class="project-tag">特效玩法</span>
+                <h3 class="project-title">AI 风格化（2024-2025）</h3>
                 <div class="project-info">
-                    <p>横向对比测评市面上多款模型与自研模型，输出可决策的测评报告与技术选型建议；建立多维评测标准与 MOS 打分示例。通过扩充样本总量并提升线上真实数据占比，深度支撑各场景业务效果精准评估。</p>
+                    <h4>背景：丰富抖音特效生态，产出高质量风格化特效带动投稿</h4>
+                    
+                    <h4>成果：「彩铅风」达成大盘 <span class="data-red">A 级</span>投稿爆款、消费 <span class="data-red">S- 级爆款</span></h4>
+                    
+                    <h4>主要职责：完成风格目标效果定义，独立搭建效果生成链路，LoRA 数据优化，分场景精细调参，高效高标准把控效果上线</h4>
+                    
                 </div>
+
+                <h4 class="section-title-3">基础 workflow 搭建</h4>
                 <div class="img-full">
-                    <img src="assets/截屏2026-07-22%2018.36.57.png" alt="">
+                    <img src="assets/截屏2026-07-22%2018.56.49.png" alt="">
+                </div>
+
+                <h4 class="section-title-3">效果展示</h4>
+                <div class="img-full">
+                    <img src="assets/截屏2026-07-22%2017.03.45.png" alt="">
+                </div>
+                <div class="video-group">
+                    <div class="video-item">
+                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/7%E6%9C%8822%E6%97%A5%288%29.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-label">彩铅风演示 1</div>
+                    </div>
+                    <div class="video-item">
+                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/7%E6%9C%8822%E6%97%A5%287%29.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-label">彩铅风演示 2</div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="project" draggable="true">
+                <span class="project-tag">特效玩法</span>
+                <h3 class="project-title">AI 音乐（2024-2025）</h3>
+                <div class="project-info">
+                    <h4>背景：预期通过AI音乐生成能力拓展 AI 特效的品类及玩法，以新的交互方式降低用户创作门槛，促进用户创意表达，带动投稿和内容消费价值的提高。</h4>
+                    
+                    <h4>成果：跑通 AI 音乐生成全链路，「AI 我的新年单曲」达成年轻 <span class="data-red">S-</span>、消费 <span class="data-red">S- 爆款</span></h4>
+                    
+                    <h4>主要职责：特效交互与内容设计，编写 PE 把控 AI 生成音乐与歌词质量</h4>
+                    
+                    <ul>
+                        <li><strong>降低创作门槛：</strong>通过图片投稿切入，提供命题制定方式降低文本创作难度</li>
+                        <li><strong>歌词要素分类：</strong>按 场景 / 主题 / 事件 / 情感 / 人物 五大分类，以内容识别替代文本输入，丰富歌词内容</li>
+                        <li><strong>玩法包装：</strong>采用音乐专辑的形式，多图上传 + 黑胶唱片包装形式，突出音乐原创</li>
+                    </ul>
+                    <blockquote>洞察热点反哺特效，同年 AI 歌曲"还我妈生鼻"爆火，我们将 "音" 引入 "文、图、视频" 的生成链路，通过<strong>歌曲创作</strong>和<strong>音色克隆</strong>两大方向拓展 AI 特效品类，降低用户创作门槛，带动投稿与内容消费。</blockquote>
+                </div>
+
+                <div class="img-group">
+                    <div class="img-item">
+                        <img src="assets/截屏2026-07-22%2016.27.07.png" alt="">
+                    </div>
+                    <div class="img-item">
+                        <img src="assets/截屏2026-07-22%2016.06.42.png" alt="">
+                    </div>
+                </div>
+
+                <h4 class="section-title-3">效果展示</h4>
+                <div class="img-group">
+                    
+                    <div class="img-item">
+                        <img src="assets/11.jpg" alt="">
+                    </div>
+                </div>
+                <div class="video-group">
+                    <div class="video-item">
+                        <video style="width: 100%; height: auto; object-fit: contain;" preload="metadata"><source src="assets/ScreenRecording_01-07-2025 15-56-24_1.mp4" type="video/quicktime"><source src="assets/ScreenRecording_01-07-2025 15-56-24_1.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-label">演示视频 1</div>
+                    </div>
+                    
+                    <div class="video-item">
+                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/20250106-193301.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
+                        <div class="video-label">演示视频 2</div>
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="divider"></div>
 
             <div class="project" draggable="true">
-                <span class="project-tag">创新项目</span>
-                <h3 class="project-title">随变 AI（2026）</h3>
+                <span class="project-tag">核心项目</span>
+                <h3 class="project-title">轻颜/抖音 AI 写真（2023-2024）</h3>
                 <div class="project-info">
-                    <h4>链路搭建：聚焦 "OC 原创角色" 这一核心业务方向，端到端构建 "角色创建 → 角色资产沉淀 → 角色创作" 全流程能力，分模块打通用户从创建到消费的完整链路。</h4>
+                    <h4>背景：轻颜AI写真项目于23年7月立项，11/3上线，11/20开始陆续推广，是公司首个带有分身的真人AI生成玩法。</h4>
                     
-                    <h4>主要职责：</h4>
-                    <ul>
-                        <li><strong>效果定义：</strong>完成 OC 创作 Onepage 效果标准，角色设定、监修注入创作，图像与视频能力结合，持续挖掘高消费表达内容，打造爆款玩法。</li>
-                        <li><strong>Agent 共建：</strong>基于对话式交互，定义触发时机、意图分流，约定上下游 Agent 输入与输出格式，参与全链路 Agent 意图识别与上下文记忆存储模块的方案设计与联调。</li>
-                        <li><strong>Skill 编排：</strong>基于 Skill 体系封装角色创建、资产管理、创作生图等能力模块，通过 Prompt 工程化 + Skill 触发规则设计，实现 Agent 对多场景任务的自动路由与稳定调用。</li>
-                        <li><strong>Coding 提效：</strong>编写 Python / 前端脚本完成数据处理、批量生图调试、效果 Prompt 自动化验证与链路联调，显著提升迭代效率，降低对研发排期依赖。</li>
-                    </ul>
+                    <h4>成果：公司首个真人 AI 玩法 —— 端内拉新完成度 <span class="data-red">900%</span>、DNU 环比 <span class="data-red">+28%</span>、主话题 VV <span class="data-red">3.1 亿</span>、累计拉新拉活 <span class="data-red">1500 万 +</span>; 口碑超越妙鸭等竞品；App Store 免费榜 <span class="data-red">73 → 17</span>。</h4>
+                    
+                    <h4>主要职责：定义目标效果，从 0-1 跑通 AI 形象链路，主攻 ID 保持痛点，统筹数据打标、风格打磨与模型训练全流程。</h4>
+                    
                 </div>
 
-                <h4 class="section-title-3">产品流程设计</h4>
-                <div class="img-full">
-                    <img src="assets/截屏2026-07-22%2017.49.24.png" alt="">
-                </div>
-
-                <h4 class="section-title-3">效果 Agent 框架</h4>
-                <div class="img-full">
-                    <img src="assets/flowchart-animation%20(1).gif" alt="" style="width: 100%; height: auto;">
-                </div>
-                <h4 class="section-title-3">AI 效果设计</h4>
+                <h4 class="section-title-3">产品链路</h4>
                 <div class="img-group">
                     <div class="img-item">
-                        <img src="assets/3比4.png" alt="">
+                        <img src="assets/截屏2026-07-22%2015.35.16.png" alt="">
                     </div>
                     
                     
-                    
                 </div>
-                <div class="video-group-1">
-                    <div class="video-item">
-                        <video style="width: 100%; height: auto; object-fit: contain;"><source src="assets/ba%E7%94%9F%E6%88%902.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
-                        <div class="video-label">成片</div>
-                    </div>
+
+                <h4 class="section-title-3">效果打磨与沉淀 SOP</h4>
+                <div class="highlight">
+                    <ul>
+                        <li><strong>用户相似度：</strong>WebUI 搭建全链路，优化分身与风格 LoRA、利用 IP-Adapter 将身份特征注入，和 ControlNet 配合，锁定角色的 IP 外观和人物长相。</li>
+                        <li><strong>写真风格：</strong>聚焦胶片风格，还原胶片系列的色调、质感、光圈，人物情绪、姿态等，通过效果突破刺激用户的视觉体验与新鲜感，最终达成爆款出圈。</li>
+                        <li><strong>SOP沉淀：</strong>轻颜 AI 写真作为自研全新链路首次在业务中落地，在效果上线后，同步梳理制定了真人 LORA 的制作标准，建立起轻颜 AI 写真 SOP，为后续 AI 形象进抖音打下良好基础。</li>
+                    </ul>
                 </div>
-                
+                <div class="img-full">
+                    <img src="assets/7月22日%281%29.gif" alt="">
+                </div>
+
+                <h4 class="section-title-3">口碑出圈与影响力</h4>
+                <p style="font-size:14px;color:#4b5563;margin-bottom:16px;">轻颜AI写真相关话题 #这个胶片的杀伤力不亚于初恋、#看看你的AI美式学院照，分别登上抖音挑战榜 TOP1、抖音热榜 TOP1。引发评论区跟风晒图持续带动跟投，用户口碑表现佳，整体超出预期。</p>
+                <div class="img-full">
+                    <img src="assets/7月22日%282%29.gif" alt="">
+                </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="exp-bondee">
             <div class="section-header">
                 <h2>Effects Planner | BONDEE | 2022–2023</h2>
             </div>
@@ -648,7 +706,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="exp-meitu">
             <div class="section-header">
                 <h2>AR Designer | Meitu | 2021–2022</h2>
             </div>
@@ -702,14 +760,14 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="exp-other">
             <div class="section-header">
                 <h2>Other</h2>
             </div>
 
             <div style="margin-bottom:32px;">
                 <h3 class="other-title">Coding</h3>
-                <div style="display: grid; grid-template-columns: 81fr 256fr 256fr; gap: 12px;">
+                <div class="coding-grid" style="display: grid; grid-template-columns: 81fr 256fr 256fr; gap: 12px;">
                     <div>
                         <div class="video-item coding-card" style="display: flex; flex-direction: column; height: 100%;">
                             <video style="flex: 1; width: 100%; object-fit: contain;" preload="metadata" controls playsinline><source src="assets/%E5%BD%95%E5%B1%8F2026-07-22%2016.33.01.mp4" type="video/quicktime"><source src="assets/%E5%BD%95%E5%B1%8F2026-07-22%2016.33.01.mp4" type="video/mp4">您的浏览器不支持视频播放</video>
