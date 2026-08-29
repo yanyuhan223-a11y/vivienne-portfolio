@@ -470,6 +470,15 @@ body.raw .ph.app{padding:0;background:#08090d}
   .fx-t{margin:48px 0 20px}
 }
 
+/* ===== ARCANA 塔罗：riso 荧光牌面直出，不走白底象牙化那套压色 ===== */
+.ph.riso{background:#07070a;padding:10px}
+.ph.riso::after{display:none}
+.ph.riso::before{inset:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.ph.riso img{filter:none}
+.ph.riso:hover img{filter:none}
+.fx .gr3 .ph.band,.fx .gr4 .ph.band{height:240px}
+@media(max-width:720px){.fx .gr3 .ph.band,.fx .gr4 .ph.band{height:190px}}
+
 /* ---------- lightbox ---------- */
 .lbx{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:44px;
   background:rgba(3,3,4,.95);backdrop-filter:blur(6px)}
@@ -1744,6 +1753,216 @@ body.raw .lbx img.neg{filter:none}
     </div>
   </div>
 </section>
+
+<!-- ============ FEATURED CASE · ARCANA 塔罗占卜 ============ -->
+<section class="fx" id="arcana">
+  <div class="idx rv">PERSONAL · AI IMAGE PIPELINE × WEB — 2026</div>
+  <div class="bcr rv"><span>Personal</span><i>/</i><span>0 → 1 自研 Web</span><i>/</i><b>AI 生图链路 + 交互设计</b></div>
+  <h2 class="rv">ARCANA · 塔罗占卜</h2>
+  <p class="one rv">一副自己生成的 78 张牌，和一台不说废话的解读引擎——把「AI 出图」和「内容结构」放进同一个页面里验证一次。</p>
+
+  <div class="fx-meta rv">
+    <div><span>ROLE</span><b>独立设计 + 编码实现 · 1 人全流程</b></div>
+    <div><span>TIMELINE</span><b>2026.08 · 交互已迭代到第三版</b></div>
+    <div><span>SCOPE</span><b>风格锁 / AI 生图链路 / 牌义与解读引擎 / 前端实现</b></div>
+    <div><span>STACK</span><b>AI 生图 · 原生 HTML / CSS / JS · 零框架</b></div>
+  </div>
+
+  <div class="fx-kv rv">
+    <img src="assets/tarot/kv.jpg" alt="ARCANA 塔罗占卜主视觉">
+    <div class="tagline">Ask once. Read it <em>properly</em>.</div>
+  </div>
+
+  <div class="fx-3 rv">
+    <div>
+      <span class="kx">挑战</span>
+      <p>做塔罗网页，难的不是画牌，是两件事：解读要<b>可信</b>，不能是随机拼词的星座运势口吻；氛围要<b>沉浸</b>，占卜这件事非常吃感觉。前者是内容结构问题，后者是视觉与动效问题。</p>
+    </div>
+    <div>
+      <span class="kx">解法</span>
+      <p>视觉沿用我自己的 <b>riso 荚光限定套印</b>风格锁，让 43 张自制牌面从头到尾像同一副牌；内容则先建 78 张牌义数据库，再用三重交叉的解读引擎，让每一句话都有出处。</p>
+    </div>
+    <div>
+      <span class="kx">我做了什么</span>
+      <p>写死一段 style lock prompt 批量出牌面并人工筛选重做；剩下 40 张数字小牌<b>改用代码画</b>；搭牌义库、 6 种牌阵与解读引擎；交互做了三版，把点击从 10~15 次压到 2~6 次。</p>
+    </div>
+  </div>
+
+  <div class="fx-t rv"><span>01</span><h3>视觉定义 · riso 荚光限定套印</h3></div>
+  <p class="note rv">这套视觉不是为这个项目新做的，是我一直在用的<b>个人风格锁</b>：黑场压到 #07070a，纸块用米白 #f2ece0，颜色只给四支荚光限定色，粗网点半调铺底，再把<b>品红图层向左、荚光绿图层向上</b>推出套印错位，补上纸张颇粒与规线出血标记。零圆角、零渐变。参考语汇是 1970s 科学图鉴 × 神秘学。</p>
+  <div class="skills rv">
+    <span class="sk">黑场 #07070a</span><span class="sk">纸块 #f2ece0</span>
+    <span class="sk">品红 #ff2d94</span><span class="sk">青 #00e0ff</span><span class="sk">酸黄 #f7ff35</span><span class="sk">荚光绿 #4dff88</span>
+    <span class="sk g">粗网点半调</span><span class="sk g">品红左移 / 荚光绿上移</span><span class="sk g">纸张颇粒</span><span class="sk g">规线与出血标记</span><span class="sk g">2:3 竖版统一</span>
+  </div>
+  <div class="gr3 rv" style="margin-top:22px">
+    <div><div class="ph riso band"><img loading="lazy" src="assets/tarot/deck-hands.jpg" alt="ARCANA 牌堆主画面"></div><div class="cap"><i>◆</i>主画面 · 四色限定与套印错位</div></div>
+    <div><div class="ph riso band"><img loading="lazy" src="assets/tarot/band-suits.jpg" alt="四花色彽记"></div><div class="cap"><i>◆</i>四花色彽记 · 权杖 / 圣杯 / 宝剑 / 星币</div></div>
+    <div><div class="ph riso band"><img loading="lazy" src="assets/tarot/band-moon.jpg" alt="章节横幅"></div><div class="cap"><i>◆</i>章节横幅 · 规线与半调网点</div></div>
+  </div>
+
+  <div class="fx-t rv"><span>02</span><h3>牌面生成链路 · AI 出量，人定风格</h3></div>
+  <p class="note rv">43 张牌面全部自己生成：<b>22 张大阿卡纳 + 16 张宫廷牌 + 1 张牌背 + 4 个花色彽记</b>。关键不是提示词写得多花，而是把风格锁写死之后就不再改——同一段 style lock 反复复用，出来的牌才像同一副。</p>
+  <div class="flow rv">
+    <div class="stg">
+      <div class="no">STAGE 01</div>
+      <h4>风格锁</h4>
+      <div class="en">Style Lock</div>
+      <ul>
+        <li>一段固定的 style lock prompt 存成文件，每次生成直接复用</li>
+        <li>写明米白纸底 + 纯黑内嵌画板的固定构造</li>
+        <li>硬条件：禁止任何文字 / 字母 / 数字 / 水印</li>
+      </ul>
+    </div>
+    <div class="arw2">→</div>
+    <div class="stg">
+      <div class="no">STAGE 02</div>
+      <h4>批量生成</h4>
+      <div class="en">Batch Generation</div>
+      <ul>
+        <li>大阿卡纳、宫廷牌、彽记与牌背分批出图</li>
+        <li>每一批 prompts 单独留档，major / court / fix 三份</li>
+        <li>牌面量大，先追求一致性，再追求单张好看</li>
+      </ul>
+    </div>
+    <div class="arw2">→</div>
+    <div class="stg">
+      <div class="no">STAGE 03</div>
+      <h4>筛选与重做</h4>
+      <div class="en">Curation</div>
+      <ul>
+        <li>战车、力量等几张风格不达标或并发撞名，重写提示词重做</li>
+        <li>逐张比套印错位与配色是不是守住了风格锁</li>
+        <li>出图后统一压缩，图片目录控制在 6MB 内上线</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step rv" style="margin-top:26px"><span class="on">style lock</span><i>→</i><span class="on">分批生成</span><i>→</i><span class="on">人工筛选</span><i>→</i><span class="on">不达标重做</span><i>→</i><span class="on">压缩上线</span></div>
+  <div class="sub-t rv"><em>MAJOR ARCANA</em><h4>大阿卡纳 · 22 张中的八张</h4><s></s></div>
+  <div class="gr4 rv">
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m00.jpg" alt="愚者"></div><div class="cap"><i>◆</i>0 愚者</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m01.jpg" alt="魔术师"></div><div class="cap"><i>◆</i>I 魔术师</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m08.jpg" alt="力量"></div><div class="cap"><i>◆</i>VIII 力量 · 重做版</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m09.jpg" alt="隐者"></div><div class="cap"><i>◆</i>IX 隐者</div></div>
+  </div>
+  <div class="gr4 rv" style="margin-top:16px">
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m10.jpg" alt="命运之轮"></div><div class="cap"><i>◆</i>X 命运之轮</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m13.jpg" alt="死神"></div><div class="cap"><i>◆</i>XIII 死神</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m18.jpg" alt="月亮"></div><div class="cap"><i>◆</i>XVIII 月亮</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/m19.jpg" alt="太阳"></div><div class="cap"><i>◆</i>XIX 太阳</div></div>
+  </div>
+  <div class="sub-t rv"><em>COURT · BACK</em><h4>宫廷牌与牌背</h4><s></s></div>
+  <div class="gr4 rv">
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/w_q.jpg" alt="权杖皇后"></div><div class="cap"><i>◆</i>权杖皇后</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/c_k.jpg" alt="圣杯国王"></div><div class="cap"><i>◆</i>圣杯国王</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/s_n.jpg" alt="宝剑骑士"></div><div class="cap"><i>◆</i>宝剑骑士</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/back.jpg" alt="牌背"></div><div class="cap"><i>◆</i>牌背 · 全牌统一入口</div></div>
+  </div>
+
+  <div class="fx-t rv"><span>03</span><h3>取舍 · 40 张数字小牌不生成，用代码画</h3></div>
+  <p class="note rv">78 张里剩下的 40 张数字小牌（每个花色 Ace 到 10），我没让 AI 画。改成用四个花色彽记图，按<b>传统韦特体系的 pip 排布</b>程序化渲染：彽记去黑底后叠在纯黑画板上，配同一套网点、内规线与四角标记。既省掉 40 次生成与筛选，又让这 40 张的风格<b>绕开了随机性，绝对统一</b>——该用 AI 的地方用 AI，该用代码的地方用代码。</p>
+  <div class="step rv"><span class="on">花色彽记</span><i>→</i><span class="on">去黑底</span><i>→</i><span class="on">pip 坐标表</span><i>→</i><span class="on">按张数排布</span><i>→</i><span class="on">成牌</span></div>
+  <p class="note rv">去黑底这一步还返工过一次：最初直接用 <b>mix-blend-mode: screen</b> 把彽记的黑底滤掉，简单但一旦遇到逆位牌需要整张 180° 旋转就不可靠；后来换成带 alpha 通道的彽记图层，任意 transform 都安全。</p>
+  <div class="sub-t rv"><em>EMBLEMS</em><h4>四个花色彽记 · 一共只生成四张图</h4><s></s></div>
+  <div class="gr4 rv">
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/e_wands_a.png" alt="权杖彽记"></div><div class="cap"><i>◆</i>权杖 · 品红</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/e_cups_a.png" alt="圣杯彽记"></div><div class="cap"><i>◆</i>圣杯 · 青</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/e_swords_a.png" alt="宝剑彽记"></div><div class="cap"><i>◆</i>宝剑 · 酸黄</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/e_pents_a.png" alt="星币彽记"></div><div class="cap"><i>◆</i>星币 · 荚光绿</div></div>
+  </div>
+  <div class="sub-t rv"><em>RENDERED BY CODE</em><h4>由代码画出来的四张小牌</h4><s></s></div>
+  <div class="gr4 rv">
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/pip-w03.png" alt="权杖三"></div><div class="cap"><i>◆</i>权杖三 · 垂直三点</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/pip-c07.png" alt="圣杯七"></div><div class="cap"><i>◆</i>圣杯七 · 双列 + 底部单点</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/pip-s09.png" alt="宝剑九"></div><div class="cap"><i>◆</i>宝剑九 · 三×三 方阵</div></div>
+    <div><div class="ph riso"><img loading="lazy" src="assets/tarot/pip-p10.png" alt="星币十"></div><div class="cap"><i>◆</i>星币十 · 双列五行</div></div>
+  </div>
+  <div class="skills rv" style="margin-top:16px">
+    <span class="sk">40 张小牌 · 0 次生成</span><span class="sk">1~10 十套 pip 坐标表</span><span class="sk">每牌彽记尺寸随张数递减</span>
+    <span class="sk g">同一套网点与内规线</span><span class="sk g">四角规线标记</span><span class="sk g">花色色值映射</span><span class="sk g">alpha 图层不怕逆位旋转</span>
+  </div>
+
+  <div class="fx-t rv"><span>04</span><h3>内容层 · 可信度是结构问题</h3></div>
+  <p class="note rv">解读读起来像不像真的，不取决于形容词，取决于数据结构。所以先把 78 张牌的牌义拆成字段：正位 / 逆位关键词、核心牌义、正逆位释义、建议、领域指向、元素与花色归属；再让单张解读由<b>牌位语义 × 提问领域 × 正逆位</b>三重交叉生成，而不是从句子池里随机拽一条。</p>
+  <div class="arch rv">
+    <div class="nd"><div class="dot"></div><b>78 张牌义库</b><p>每张牌都有结构化字段：关键词、核心牌义、正逆位释义、建议、领域指向与元素归属</p></div>
+    <div class="nd"><div class="dot"></div><b>6 种牌阵</b><p>从 1 张到 10 张，每个牌位带自己的语义，同一张牌落在不同牌位说的不是一件事</p></div>
+    <div class="nd"><div class="dot"></div><b>三重交叉</b><p>牌位语义 × 提问领域 × 正逆位，先生成单张解读，避开通用套话</p></div>
+    <div class="nd"><div class="dot"></div><b>综合解读</b><p>再合成一句话结论、能量结构、牌面张力、主轴故事、盲点提醒，以及三件可执行的行动</p></div>
+  </div>
+  <div class="skills rv">
+    <span class="sk">定心 · 1 张</span><span class="sk">时间 · 3 张</span><span class="sk">处境三角 · 3 张</span><span class="sk">二选一 · 5 张</span><span class="sk">关系之桥 · 5 张</span><span class="sk">凯尔特十字 · 10 张</span>
+    <span class="sk g">牌阵根据问题自动推荐</span><span class="sk g">问「走还是留」自动切二选一</span><span class="sk g">领域从问题文本推断</span>
+  </div>
+
+  <div class="fx-t rv"><span>05</span><h3>交互的三次迭代 · 少点击与仪式感的拉扯</h3></div>
+  <p class="note rv">同一个产品我重做了三版交互，每一版都是在同一对矛盾里重新找平衡点：<b>减负会不会把占卜的仪式感一起减掉</b>。</p>
+  <div class="flow rv">
+    <div class="stg">
+      <div class="no">V1</div>
+      <h4>五个页面级步骤</h4>
+      <div class="en">Too Many Steps</div>
+      <ul>
+        <li>首页 → 四道选择题 → 选牌阵 → 抽牌 → 逐张翻牌 → 解读</li>
+        <li>从落地到看解读要点 <b>10~15 次</b>、跳 5 个页面</li>
+        <li>问题：心智负担过重，人还没进入状态就已经在填表</li>
+      </ul>
+    </div>
+    <div class="arw2">→</div>
+    <div class="stg">
+      <div class="no">V2</div>
+      <h4>压成一页式</h4>
+      <div class="en">One Page</div>
+      <ul>
+        <li>首屏即提问台，领域从问题文本自动推断</li>
+        <li>留空也能直接抽，抽满自动翻牌、自动出解读</li>
+        <li>点击降到 <b>2~6 次</b>，用「替我抽」最少两次</li>
+      </ul>
+    </div>
+    <div class="arw2">→</div>
+    <div class="stg">
+      <div class="no">V3</div>
+      <h4>单主舞台换场</h4>
+      <div class="en">Stage, In Progress</div>
+      <ul>
+        <li>一页长滚虽然快，但丢了空间感，页面显得死板</li>
+        <li>改成主舞台换场 + 左上角常驻返回，维持低点击成本</li>
+        <li>加回仪式感：牌堆呼吸浮动、鼠标跟随的场、弹性缓动抽牌、错帧翻牌、套印图层漂移</li>
+        <li>重做字阶，把长文解读的可读性提上来</li>
+      </ul>
+    </div>
+  </div>
+  <div class="qt rv" style="margin-top:26px">「少点击」和「仪式感」是一对矛盾。<b>减负不能减掉塔罗本身的仪式核心</b>——抽牌前的那几秒安静、翻牌那一下的重量，都是体验的一部分，不是可以优化掉的步骤。</div>
+
+  <div class="sub-t rv"><em>V3 IN PROGRESS</em><h4>第三版现场 · 一个主舞台，四个场次</h4><s></s></div>
+  <div class="gr2 rv">
+    <div><div class="ph app"><img loading="lazy" src="assets/tarot/site-ask.jpg" alt="ARCANA 提问台"></div><div class="cap"><i>◆</i>场 01 提问台 · 写不写都能抽，牌阵自动推荐</div></div>
+    <div><div class="ph app"><img loading="lazy" src="assets/tarot/site-draw.jpg" alt="ARCANA 抽牌场"></div><div class="cap"><i>◆</i>场 02 抽牌 · 78 张扇面与牌位槽，抽满自动翻牌</div></div>
+  </div>
+  <div class="gr2 rv" style="margin-top:16px">
+    <div><div class="ph app"><img loading="lazy" src="assets/tarot/site-read-card.jpg" alt="ARCANA 单张牌解读"></div><div class="cap"><i>◆</i>场 03 单张解读 · 牌位语义 × 领域 × 正逆位</div></div>
+    <div><div class="ph app"><img loading="lazy" src="assets/tarot/site-read-sum.jpg" alt="ARCANA 综合解读"></div><div class="cap"><i>◆</i>场 03 综合解读 · 能量结构 / 牌面张力 / 主轴故事</div></div>
+  </div>
+
+  <div class="fx-t rv"><span>06</span><h3>这个项目让我确认的三件事</h3></div>
+  <div class="fx-3 rv">
+    <div>
+      <span class="kx">AI 的位置</span>
+      <p>AI 生图负责「量与统一」，人负责「定风格锁与筛选」。风格锁一旦写死，批量才会变成优势；否则量越大、风格越正。</p>
+    </div>
+    <div>
+      <span class="kx">可信度是结构</span>
+      <p>内容的可信感来自字段与交叉规则，不来自修饰。结构没搭好，文案写得再好也只是星座口吻。</p>
+    </div>
+    <div>
+      <span class="kx">减负有底线</span>
+      <p>每一次把步骤变短，都要回头确认体验的核心快感还在不在。快不是目的，快只是手段。</p>
+    </div>
+  </div>
+  <p class="note rv" style="margin-top:26px">→ <a href="https://yanyuhan223-a11y.github.io/arcana-oracle/" target="_blank" rel="noopener" style="color:#ff3b3b;border-bottom:1px solid rgba(255,59,59,.5)">打开线上塔罗占卜页面</a>　（整副 78 张牌、6 种牌阵、留空也能直接抽）</p>
+</section>
+
+
 
 
 
