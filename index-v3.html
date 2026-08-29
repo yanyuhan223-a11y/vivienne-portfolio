@@ -830,14 +830,14 @@ body.raw .lbx img.neg{filter:none}
   img,video,svg{max-width:100%}
 
   /* --- 容器留白 --- */
-  .wide{padding:0 22px}
-  .chapter{padding:74px 22px 20px;scroll-margin-top:52px}
-  .row{padding:36px 22px;gap:22px}
+  .wide{padding:0 13px}
+  .chapter{padding:74px 13px 20px;scroll-margin-top:52px}
+  .row{padding:36px 13px;gap:22px}
   .row,.row.txt,.row.hasimg{grid-template-columns:minmax(0,1fr)!important}
-  .row.tkonly{padding:24px 22px 52px}
-  .fx{padding:64px 22px 26px;scroll-margin-top:52px}
-  .proto2{padding:6px 22px 10px}
-  .stats{padding-left:22px;padding-right:22px}
+  .row.tkonly{padding:24px 13px 52px}
+  .fx{padding:64px 13px 26px;scroll-margin-top:52px}
+  .proto2{padding:6px 13px 10px}
+  .stats{padding-left:13px;padding-right:13px}
 
   /* --- 能力标签不挤压 --- */
   .skills{gap:8px}
@@ -885,13 +885,37 @@ body.raw .lbx img.neg{filter:none}
   .fx .one{font-size:15px;line-height:1.85}
   .bcr{flex-wrap:wrap;gap:4px 8px}
 
-  /* --- 所有多列网格→单列 --- */
-  .g2,.g3,.gr2,.gr3,.gr4,.gr5,.gr6,.gal,.cds,.mt4,.fx-3,.fx-meta,.arch,.mets,
-  .ecds,.dons,.dp2,.fsub,.qsteps,.flow,.lproto{grid-template-columns:minmax(0,1fr)!important}
-  .gr3.wall{grid-template-columns:repeat(2,1fr)!important}
+  /* --- 文字为主的多列 → 单列 --- */
+  .cds,.fx-3,.fx-meta,.arch,.mets,.ecds,.dons,.dp2,.fsub,.qsteps,.flow,.lproto,
+  .fx-kv{grid-template-columns:minmax(0,1fr)!important}
   .arw2{display:none}
-  .fx .gr2 .ph,.fx .gr3 .ph,.fx .gr4 .ph,.fx .gr5 .ph,.fx .gr6 .ph{height:auto!important}
-  .ph{padding:8px}
+
+  /* --- 图片/素材网格 → 保留 web 端的多列关系，只缩间距与尺寸 --- */
+  .gr2,.gr3,.gr4,.gr3.wall,.mt4,.gal{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .gr6{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+  .gr5{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .stack.g2,.stack.g3{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  /* 视频要宽度，单列 */
+  .stack.g2:has(.ph.v),.stack.g3:has(.ph.v),.gr2:has(.ph.v){grid-template-columns:minmax(0,1fr)!important}
+  .gr3:has(.ph.v),.gr4:has(.ph.v),.gr6:has(.ph.v){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .fx .gr6 .ph.v{height:150px}
+
+  /* 装裱卡纸内缩，把宽度让给图 */
+  .ph{padding:6px}
+  .ph::after,.ph::before{inset:6px}
+  .gr6 .ph{padding:4px}
+  .gr6 .ph::after,.gr6 .ph::before{inset:4px}
+
+  /* 固定高度盒等比降低，object-fit:contain 不变 */
+  .fx .gr2 .ph,.fx .gr3 .ph,.fx .gr4 .ph,.fx .gr5 .ph{height:170px}
+  .fx .gr6 .ph{height:120px}
+  .fx .gr3 .ph.band,.fx .gr4 .ph.band{height:135px}
+  .fx .gr3 .ph.app,.fx .gr4 .ph.app,.fx .gr5 .ph.app{height:300px}
+
+  /* 图注字号跟着缩 */
+  .cap{font-size:8.5px;letter-spacing:1.6px;margin-top:6px}
+  .gr2 .cap,.gr3 .cap,.gr4 .cap,.gr6 .cap{margin-top:6px}
+  .mt4 .mtile b{font-size:10.5px}
   .cmp{max-width:100%}
   .lproto img{max-width:100%}
 
@@ -911,7 +935,7 @@ body.raw .lbx img.neg{filter:none}
 @media (max-width:480px){
   .hero h1{font-size:40px;letter-spacing:0}
   .hero .zh{font-size:15.5px;letter-spacing:5px;text-indent:5px}
-  .gr3.wall{grid-template-columns:minmax(0,1fr)!important}
+  .gr3.wall{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .menu a{font-size:11px;letter-spacing:1.1px}
   .lbx{padding:12px}
   .lbx-x{top:10px;right:12px;width:36px;height:36px;font-size:14px}
