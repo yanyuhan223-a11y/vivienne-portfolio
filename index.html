@@ -635,17 +635,6 @@ body.raw .lbx img.neg{filter:none}
 .alines{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;opacity:0;transition:.6s}
 .alines path{fill:none;stroke:rgba(224,83,60,.42);stroke-width:1;stroke-dasharray:4 6}
 .astage:hover .alines,.astage.on .alines{opacity:1}
-@media (max-width:1080px){
-  .astage{min-height:0;display:block;margin-top:18px}
-  .astage .ahint{display:none}
-  .acen{height:auto;justify-content:center}
-  .acen .achar{height:auto;max-height:420px;margin:0 auto}
-  .aname{position:static;transform:none;margin-top:10px}
-  .acard{position:static;opacity:1;filter:none;transform:none!important;width:auto!important;pointer-events:auto}
-  .astage .alines{display:none}
-  .astage:after{content:'';display:block;clear:both}
-  .astage .acard{display:inline-block;width:calc(50% - 8px)!important;vertical-align:top;margin:14px 4px 0}
-}
 
 .acard.c2 .am{border:none;background:none;padding:0;box-shadow:none;backdrop-filter:none}
 .acard.c2 .am img{filter:drop-shadow(0 18px 32px rgba(0,0,0,.6))}
@@ -751,7 +740,7 @@ body.raw .lbx img.neg{filter:none}
   .proto2 .mtt.a2{grid-row:3;margin-top:34px}
   .proto2 .qbox{grid-row:4}
 }
-@media (max-width:620px){.pwrap{flex-direction:column}.pm{width:100%}}
+
 
 .plist{margin-top:18px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.012)}
 .pli{display:grid;grid-template-columns:26px minmax(0,1fr) 44px;gap:10px 12px;align-items:center;
@@ -841,14 +830,14 @@ body.raw .lbx img.neg{filter:none}
   img,video,svg{max-width:100%}
 
   /* --- 容器留白 --- */
-  .wide{padding:0 20px}
-  .chapter{padding:74px 20px 20px;scroll-margin-top:52px}
-  .row{padding:36px 20px;gap:22px}
+  .wide{padding:0 22px}
+  .chapter{padding:74px 22px 20px;scroll-margin-top:52px}
+  .row{padding:36px 22px;gap:22px}
   .row,.row.txt,.row.hasimg{grid-template-columns:minmax(0,1fr)!important}
-  .row.tkonly{padding:24px 20px 52px}
-  .fx{padding:64px 20px 26px;scroll-margin-top:52px}
-  .proto2{padding:6px 20px 10px}
-  .stats{padding-left:20px;padding-right:20px}
+  .row.tkonly{padding:24px 22px 52px}
+  .fx{padding:64px 22px 26px;scroll-margin-top:52px}
+  .proto2{padding:6px 22px 10px}
+  .stats{padding-left:22px;padding-right:22px}
 
   /* --- 能力标签不挤压 --- */
   .skills{gap:8px}
@@ -915,10 +904,7 @@ body.raw .lbx img.neg{filter:none}
   .tks.big .tk{padding:12px 16px;font-size:14px}
   .tks.big .tkr{gap:10px}
 
-  /* --- 角色创建原型 --- */
-  .pwrap{flex-direction:column;gap:20px}
-  .pm{width:100%;max-width:300px;margin:0 auto}
-  .pside{width:100%}
+  /* --- 角色创建原型：保持与 web 一致，整体等比缩放 --- */
   .qimg:after{opacity:1}
 }
 
@@ -937,6 +923,20 @@ body.raw .lbx img.neg{filter:none}
   .cursor-glow{display:none}
   .astage .acard{opacity:1!important}
   .qimg:after{opacity:1}
+}
+
+/* --- 等比缩放容器（窄屏下保持桌面版版式） --- */
+.fitw{position:relative;width:100%;max-width:100%;min-width:0;overflow:hidden}
+.fitw>*{transform-origin:top left}
+.proto2>*,.proto2 .pgrp,.fx>*{min-width:0}
+.proto2 .pgrp{overflow:hidden}
+@media (max-width:1080px),(hover:none){
+  .astage .ahint{opacity:0}
+  .astage .aname{opacity:0}
+  .astage .acard{opacity:1!important;filter:none!important;
+    transform:translate(0,0) scale(1)!important;pointer-events:auto}
+  .astage .alines{opacity:1}
+  .astage .aglow{opacity:1;transform:translate(-50%,-50%) scale(1)}
 }
 </style>
 </head>
@@ -1117,7 +1117,7 @@ body.raw .lbx img.neg{filter:none}
   <div class="mtt a2">风格四象限 · 候选风格判定</div>
 
   <div class="pgrp">
-    <div class="pwrap">
+    <div data-fit="548" class="pwrap">
   <div class="pm">
     <div class="pm-scr">
       <div class="pm-bar"><span>8:00</span><em></em></div>
@@ -1164,7 +1164,7 @@ body.raw .lbx img.neg{filter:none}
 
 <div class="fx-t rv"><span>05</span><h3>角色资产</h3></div>
   <p class="note rv">角色不能是一次性的。创建完成后，形象、设定与偏好被沉淀成<b>可复用的角色档案</b>：Web 端与移动端都有独立的档案页，角色主图作为身份锚点，配合上下文记忆，保证下一次创作还是同一个「他」。同时把角色做成了<b>移动端桌宠</b>——它会在主页待机、会回应，让用户对 OC 产生日常陪伴感，这是「资产」变成「情感」的关键一步。</p>
-  <div class="astage rv" id="astage">
+  <div data-fit="1180" class="astage rv" id="astage">
     <div class="ahint"><i></i>HOVER 角色立绘 · 展开背后沉淀的角色资产</div>
     <div class="acen">
       <div class="aglow"></div>
@@ -2152,6 +2152,31 @@ el.classList.toggle('on',el.getAttribute('data-i')==String(i));});});}
 [].forEach.call(lis,function(b){var i=b.getAttribute('data-i');b.addEventListener('mouseenter',function(){pick(i);});b.addEventListener('click',function(){pick(i);});});
 [].forEach.call(ths,function(b){var i=b.getAttribute('data-i');
 b.addEventListener('mouseenter',function(){pick(i);});b.addEventListener('click',function(){pick(i);});});
+})();
+</script>
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('[data-fit]'));
+  if(!items.length)return;
+  items.forEach(function(el){
+    var w=document.createElement('div');w.className='fitw';
+    el.parentNode.insertBefore(w,el);w.appendChild(el);
+  });
+  function fit(){
+    items.forEach(function(el){
+      var design=parseFloat(el.getAttribute('data-fit')),host=el.parentElement;
+      var avail=host.clientWidth||host.getBoundingClientRect().width;
+      var s=Math.min(1,avail/design);
+      if(s>=1){el.style.width='';el.style.transform='';host.style.height='';return;}
+      el.style.width=design+'px';
+      el.style.transform='scale('+s+')';
+      host.style.height=Math.ceil(el.offsetHeight*s)+'px';
+    });
+  }
+  fit();
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',function(){setTimeout(fit,60);});
+  document.addEventListener('click',function(){setTimeout(fit,700);});
 })();
 </script>
 </body>
