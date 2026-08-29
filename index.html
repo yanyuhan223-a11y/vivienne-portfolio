@@ -890,9 +890,13 @@ body.raw .lbx img.neg{filter:none}
   .cds,.fx-3,.fx-meta,.ecds,.dp2,.qsteps,.flow,.lproto,
   .fx-kv{grid-template-columns:minmax(0,1fr)!important}
   /* 短卡片保持两列：一屏看到的信息更多 */
-  .arch,.mets,.dons,.fsub{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
-  .arch>*:last-child:nth-child(odd),.mets>*:last-child:nth-child(odd),
+  .arch,.dons,.fsub{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .arch>*:last-child:nth-child(odd),
   .dons>*:last-child:nth-child(odd),.fsub>*:last-child:nth-child(odd){grid-column:1/-1}
+  .mets{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px!important}
+  .met{padding:11px 5px 12px;text-align:center}
+  .met b{font-size:16.5px;letter-spacing:0}
+  .met span{margin-top:5px;font-size:9px;letter-spacing:0;line-height:1.45}
   .arw2{display:none}
 
   /* --- 图片/素材网格 → 保留 web 端的多列关系，只缩间距与尺寸 --- */
@@ -963,10 +967,10 @@ body.raw .lbx img.neg{filter:none}
   .fchips{gap:5px;margin-top:9px}
   .fchips span{font-size:9px;padding:3px 8px;letter-spacing:.4px}
   .fcard{padding:10px 10px 11px}
-  .fcard h6{font-size:11.5px;letter-spacing:.8px;margin:0 0 6px}
+  .fcard h6{font-size:12px;letter-spacing:.8px;margin:0 0 6px}
   .fcard .ft{gap:4px;margin-bottom:7px}
   .fcard .ft span{font-size:9px;padding:1px 6px}
-  .fcard li{font-size:10.5px;line-height:1.75}
+  .fcard li{font-size:11px;line-height:1.8}
   .fman{padding:11px 12px}
   .fman b{font-size:11.5px;letter-spacing:1.2px}
   .fout{padding:9px 20px;font-size:11px;letter-spacing:2px}
@@ -1039,6 +1043,20 @@ body.raw .lbx img.neg{filter:none}
     transform:translate(0,0) scale(1)!important;pointer-events:auto}
   .astage .alines{opacity:1}
   .astage .aglow{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+/* --- 移动端头图：桌面右侧配图改成顶部横幅（AI 风格化 / AI 写真） --- */
+@media (max-width:820px){
+  .row.hasimg{min-height:0}
+  .row.hasimg .rimg,.row.hasimg .rimg.soft{display:block!important;position:relative!important;
+    order:-1;right:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;max-width:none!important;height:160px!important;
+    opacity:1!important;overflow:hidden;pointer-events:none;border:1px solid var(--hair);
+    -webkit-mask-image:none!important;mask-image:none!important}
+  .row.hasimg .rimg img{width:100%!important;height:100%!important;
+    object-fit:cover!important;object-position:50% 22%!important;
+    opacity:1!important;filter:none!important;border:none!important;
+    -webkit-mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,.42) 100%)!important;
+    mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,.42) 100%)!important}
 }
 </style>
 </head>
@@ -1388,15 +1406,13 @@ body.raw .lbx img.neg{filter:none}
   <div class="side">
     <h3>成片 Agent · 叙事型内容自动创作<span class="arw">↗</span></h3>
     <span class="kx">背景</span>
-    <p class="tx">探索型预期，利用 AI 能力，帮助用户实现有叙事感、多场景的用户作品创作。实现如下效果突破：</p>
+    <p class="tx">用 AI 把相册里的照片做成有叙事感的作品，两个效果突破：</p>
     <ul class="li">
-      <li>相册理解与聚合，实现基于相册反推或已有主题，以叙事合集方式进行内容聚合</li>
-      <li>成片效果，支持生成图集 / 视频体裁作品，其中视频首创动态模板，覆盖主要叙事结构</li>
+      <li>相册理解与聚合：反推主题，按叙事合集组织内容</li>
+      <li>图集 / 视频双体裁，视频首创动态模板覆盖主要叙事结构</li>
     </ul>
-    <span class="kx">成果</span>
-    <p class="tx">实现对相册内容的理解聚合、有叙事感的作品创作，达用户满意度评分 <span class="n">≥ 4 分</span>（满分 5 分）。</p>
     <span class="kx">主要职责</span>
-    <p class="tx">基于内容理解落地 <b>基础策略、用户画像、AI 端到端</b> 三种聚合策略，初步实现多类型合集供给；搭建从<b>素材编排 → 文案生成 → 本地成片</b>的完整链路，完成故事线文案效果定义，构建文风观点库提升整体成片文案满意度。</p>
+    <p class="tx">落地 <b>基础策略、用户画像、AI 端到端</b> 三种聚合策略，搭建<b>素材编排 → 文案生成 → 本地成片</b>完整链路，定义故事线文案效果标准，并构建文风观点库。</p>
     <p class="tx" style="color:var(--red);font-size:12px;letter-spacing:1px">◆ 两项发明专利的机制拆解见下方</p>
   </div>
 </article>
@@ -1435,7 +1451,7 @@ body.raw .lbx img.neg{filter:none}
   <div class="fsub" style="grid-template-columns:repeat(2,1fr)"><div class="fcard"><h6>专利一 · 观点库 RAG</h6><div class="ft"><span>去同质化</span><span>文风可控</span></div><ul><li><i>◆</i>主题匹配：定住该说什么</li><li><i>◆</i>关键词检索：拉出候选观点</li><li><i>◆</i>多模态语义解析：对上画面</li><li><i>◆</i>动态注入：写进文案而不生硬</li><li><i>◆</i>成效：同一相册不再反复同一句话</li></ul></div><div class="fcard"><h6>专利二 · 动态模板系统</h6><div class="ft"><span>首创</span><span>自适应</span></div><ul><li><i>◆</i>素材特征理解：数量 / 质量 / 内容</li><li><i>◆</i>大模型 PE 编排故事线</li><li><i>◆</i>素材数量 ↔ 模板自动匹配</li><li><i>◆</i>自动旁白 + 智能配乐</li><li><i>◆</i>多维兜底，不出现空帧</li></ul></div></div>
 
   <div class="sub-t rv"><em>RESULT</em><h4>成果</h4><s></s></div>
-  <div class="mets"><div class="met"><b>≥ 4.0</b><span>用户满意度评分（满分 5）</span></div><div class="met"><b>× 2</b><span>参与发明专利</span></div><div class="met"><b>2 种体裁</b><span>图集 / 视频双供给</span></div><div class="met"><b>3 套策略</b><span>基础 / 画像 / 端到端</span></div></div>
+  <div class="mets" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="met"><b>× 2</b><span>参与发明专利</span></div><div class="met"><b>2 种体裁</b><span>图集 / 视频双供给</span></div><div class="met"><b>3 套策略</b><span>基础 / 画像 / 端到端</span></div></div>
   <p class="tx" style="max-width:820px;margin-top:16px">我在这个项目里负责<b>效果定义与链路搭建</b>：从文案效果标准、故事线结构，到聚合策略的供给边界与兜底规则，再到文风观点库的搭建——这些方法后来直接长成了<b>随变 AI</b> 里的 Agent 编排思路。</p>
   <div class="sub-t rv"><em>SHOWREEL</em><h4>成片效果展示</h4><s></s></div>
   <div class="stack g3"><div class="ph v"><video preload="metadata" controls playsinline><source src="assets/飞书20250926-114530.mp4" type="video/mp4"></video></div><div class="ph v"><video preload="metadata" controls playsinline><source src="assets/飞书20250924-011645.mp4" type="video/mp4"></video></div><div class="ph v"><video preload="metadata" controls playsinline><source src="assets/飞书20250924-011528.mp4" type="video/mp4"></video></div></div>
@@ -1510,7 +1526,7 @@ body.raw .lbx img.neg{filter:none}
   </div>
   <div class="sub-t rv"><em>DESIGN</em><h4>设计亮点</h4><s></s></div>
   <div class="fsub" style="grid-template-columns:repeat(3,1fr)"><div class="fcard"><h6>降低创作门槛</h6><div class="ft"><span>图片切入</span></div><ul><li><i>◆</i>图片投稿代替文本创作</li><li><i>◆</i>命题制定降低下笔难度</li><li><i>◆</i>不会写歌词也能出作品</li></ul></div><div class="fcard"><h6>歌词要素分类</h6><div class="ft"><span>内容识别</span></div><ul><li><i>◆</i>场景 / 主题 / 事件 / 情感 / 人物</li><li><i>◆</i>要素组合代替自由输入</li><li><i>◆</i>歌词内容更丰富不重复</li></ul></div><div class="fcard"><h6>玩法包装</h6><div class="ft"><span>仪式感</span></div><ul><li><i>◆</i>音乐专辑形式组织作品</li><li><i>◆</i>多图上传 + 黑胶唱片</li><li><i>◆</i>突出“这是我的原创”</li></ul></div></div>
-  <div class="mets"><div class="met"><b>S-</b><span>年轻爆款</span></div><div class="met"><b>S-</b><span>消费爆款</span></div><div class="met"><b>全链路</b><span>AI 音乐生成跑通</span></div><div class="met"><b>+音</b><span>文 / 图 / 视频 之外的新品类</span></div></div>
+  <div class="mets"><div class="met"><b>S-</b><span>年轻爆款</span></div><div class="met"><b>S-</b><span>消费爆款</span></div><div class="met"><b>全链路</b><span>AI 音乐生成跑通</span></div><div class="met"><b>+音</b><span>文/图/视频之外的新品类</span></div></div>
 
   <div class="sub-t rv"><em>SHOWREEL</em><h4>效果展示</h4><s></s></div>
   <div class="stack g2"><div class="ph v"><video preload="metadata" controls playsinline><source src="assets/ScreenRecording_01-07-2025%2015-56-24_1.mp4" type="video/mp4"></video></div><div class="ph v"><video preload="metadata" controls playsinline><source src="assets/20250106-193301.mp4" type="video/mp4"></video></div></div>
@@ -1831,7 +1847,7 @@ body.raw .lbx img.neg{filter:none}
     </div>
     <div class="lpx">
       <span class="kx">TRY IT</span>
-      <h4>右边这台手机是可以点的</h4>
+      <h4>这台手机是可以点的</h4>
       <p>底部五个 Tab 都能切换，首页的预警条可以跳进预警中心，持仓里的 <b>应流股份</b> 可以点进个股详情看阈值可视化，日报卡片可以展开完整日报。筛选 chips 与开关也都是活的。</p>
       <p>原型完全用<b>原生 HTML / CSS / SVG 手写</b>，没有用任何设计工具导出——所有图表、脉搏线、阈值色带都是运行时按真实持仓数据算出来画的，改一个成本价，整屏数字和色带会一起变。</p>
       <a class="lpbtn" href="assets/stockpulse/proto.html" target="_blank" rel="noopener">打开完整原型（7 屏 / 11 态） ↗</a>
