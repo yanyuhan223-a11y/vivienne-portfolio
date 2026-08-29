@@ -1760,20 +1760,20 @@ body.raw .lbx img.neg{filter:none}
   <div class="fx-3 rv">
     <div>
       <span class="kx">挑战</span>
-      <p>我自己就是用户：6 只持仓横跨 A 股 / 港股 / 美股，三个时区、三套交易时段。券商 App 要么整天不吭声，要么一涨一跌就推一条，最后我把所有通知都关了。<b>真正的问题不是信息太少，而是信息没有阈值。</b></p>
+      <p>我自己就是用户：6 只持仓横跨 A 股 / 港股 / 美股。券商 App 要么整天不吭声，要么一涨一跌就推一条，最后我把通知全关了。<b>问题不是信息太少，而是信息没有阈值。</b></p>
     </div>
     <div>
       <span class="kx">解法</span>
-      <p>不做又一个行情 App，做一台<b>阈值机器</b>：只围绕「我的成本价」说话，把所有关心的事压缩成 <b>4 档预警 + 1 条独立通道</b>；同一档 4 小时内只说一次；非交易时段完全闭嘴。</p>
+      <p>不做又一个行情 App，做一台<b>阈值机器</b>：只围绕「我的成本价」说话，压成 <b>4 档预警 + 1 条独立通道</b>，同档 4 小时只说一次，非交易时段闭嘴。</p>
     </div>
     <div>
       <span class="kx">我做了什么</span>
-      <p>先写脚本自用（v0.1 → v0.4，跑了 78 天、攒下 3,529 行运行日志），再把被验证过的规则<b>反向抽象成产品</b>：7 屏高保真可交互原型、一套四档预警语义系统，以及面向「信任感」的状态可视化。</p>
+      <p>先写脚本自用（v0.1 → v0.4）并持续运行，再把验证过的规则<b>反向抽象成产品</b>：7 屏可交互原型、四档预警语义系统，以及面向「信任感」的状态可视化。</p>
     </div>
   </div>
 
   <div class="fx-t rv"><span>01</span><h3>从脚本到产品</h3></div>
-  <p class="note rv">这个项目的特别之处在于顺序是反的：<b>先有一个跑了 78 天的真实系统，再有产品设计</b>。日志本身就是最好的用户研究——哪些提醒我真的点开看了、哪些被我当成噪音划掉，全都留在里面。</p>
+  <p class="note rv">这个项目的顺序是反的：<b>先有一个真实跑着的系统，再有产品设计</b>。运行日志本身就是最好的用户研究。</p>
   <div class="flow rv">
     <div class="stg">
       <div class="no">STAGE 01</div>
@@ -1781,8 +1781,8 @@ body.raw .lbx img.neg{filter:none}
       <div class="en">Script for One</div>
       <ul>
         <li>v0.1 单市场轮询 → v0.4 三市场 + 双数据源容灾</li>
-        <li>每 90 秒取一次价，飞书 Webhook 推送</li>
-        <li>连续运行 78 天，沉淀 3,529 行运行日志</li>
+        
+        <li>持续运行，日志里留下真实触发记录</li>
       </ul>
     </div>
     <div class="arw2">→</div>
@@ -1791,9 +1791,9 @@ body.raw .lbx img.neg{filter:none}
       <h4>规则沉淀</h4>
       <div class="en">Rules Distilled</div>
       <ul>
-        <li>回看日志：哪些提醒我真的看了，哪些是噪音</li>
+        <li>回看日志：哪些提醒真的看了，哪些是噪音</li>
         <li>砍掉常规涨跌播报，只留四档 + 单日闪崩</li>
-        <li>加入 4 小时同档冷却与交易时段自动识别</li>
+        
       </ul>
     </div>
     <div class="arw2">→</div>
@@ -1803,19 +1803,19 @@ body.raw .lbx img.neg{filter:none}
       <div class="en">Designed as a Product</div>
       <ul>
         <li>把 CLI 里看不见的规则翻译成界面语言</li>
-        <li>阈值可视化 / 冷却倒计时 / 合并折叠 / 数据源健康</li>
+        
         <li>产出 7 屏高保真可交互原型</li>
       </ul>
     </div>
   </div>
 
   <div class="fx-t rv"><span>02</span><h3>四档预警语义系统</h3></div>
-  <p class="note rv">所有阈值都<b>相对成本价</b>而不是昨收——因为我关心的从来不是「今天涨没涨」，而是「离我的决策点还有多远」。单日闪崩是唯一的例外，它走独立通道，不受成本档位影响。</p>
+  <p class="note rv">所有阈值都<b>相对成本价</b>而不是昨收——我关心的不是「今天涨没涨」，而是「离决策点还有多远」。单日闪崩是唯一例外，走独立通道。</p>
   <div class="arch rv">
-    <div class="nd"><div class="dot"></div><b>关注 −5%</b><p>第一次偏离，只做记录性提醒，不打断当下正在做的事</p></div>
-    <div class="nd"><div class="dot"></div><b>预警 −10%</b><p>进入需要重新判断的区间，同步给出「距止损线还有多少」</p></div>
-    <div class="nd"><div class="dot"></div><b>止损 −15%</b><p>最高优先级，App 强提醒 + 飞书加急，附带完整持仓上下文</p></div>
-    <div class="nd"><div class="dot"></div><b>止盈 +20%</b><p>唯一的正向档位，提示分批减仓，并记录本周第几次触发</p></div>
+    <div class="nd"><div class="dot"></div><b>关注 −5%</b><p>只做记录性提醒，不打断当下</p></div>
+    <div class="nd"><div class="dot"></div><b>预警 −10%</b><p>需要重新判断，同步给出距止损线的距离</p></div>
+    <div class="nd"><div class="dot"></div><b>止损 −15%</b><p>最高优先级，强提醒 + 飞书加急，带持仓上下文</p></div>
+    <div class="nd"><div class="dot"></div><b>止盈 +20%</b><p>唯一正向档位，提示分批减仓并记录触发次数</p></div>
   </div>
   <div class="skills rv">
     <span class="sk">⚡ 单日闪崩 −5% · 独立通道</span>
@@ -1826,14 +1826,14 @@ body.raw .lbx img.neg{filter:none}
 
   <div class="fx-t rv"><span>03</span><h3>四个关键设计决策</h3></div>
   <div class="cds rv">
-    <div class="cd"><div class="n2">01</div><h5>反直觉地选了「绿涨红跌」</h5><p>一个界面里，红色不能有两个意思。如果红＝上涨，那 −15% 止损的红就失效了。我把红色全局唯一地留给「危险」，代价是违背 A 股用户直觉，收益是四档预警的颜色语义从头到尾自洽——设置里保留一键切回。</p></div>
-    <div class="cd"><div class="n2">02</div><h5>自选池刻意不显示盈亏</h5><p>没买的东西没有成本价，硬算「如果当时买了会怎样」只会制造焦虑。自选只回答一个问题：<b>现在值不值得看一眼</b>。所以这里只保留突破价位与单日异动阈值，一个盈亏数字都不出现。</p></div>
-    <div class="cd"><div class="n2">03</div><h5>把「沉默」设计成可见的功能</h5><p>冷却倒计时、合并折叠、静默时段，全部做成界面上看得见的状态，而不是藏在配置里。用户要能看到「它现在不说话，是因为规则让它别说」——沉默被解释了，才会变成可信任的。</p></div>
-    <div class="cd"><div class="n2">04</div><h5>让工程缺陷变成产品信息</h5><p>日志里出现最多的一行是 yfinance 的 <b>Too Many Requests</b>。与其藏起来，不如把数据源健康度直接摆到界面上：主源 / 备源 / 降级中，近 24h 成功率一格一格画出来。让用户知道数据什么时候不可靠，比假装永远可靠更重要。</p></div>
+    <div class="cd"><div class="n2">01</div><h5>反直觉地选了「绿涨红跌」</h5><p>一个界面里红色不能有两个意思。红＝上涨的话，−15% 止损的红就失效了。我把红色全局唯一留给「危险」，换来四档语义自洽，设置里可一键切回。</p></div>
+    <div class="cd"><div class="n2">02</div><h5>自选池刻意不显示盈亏</h5><p>没买的东西没有成本价，硬算「如果当时买了」只会制造焦虑。自选只回答<b>现在值不值得看一眼</b>，只留突破价位与异动阈值。</p></div>
+    <div class="cd"><div class="n2">03</div><h5>把「沉默」设计成可见的功能</h5><p>冷却倒计时、合并折叠、静默时段都做成界面上看得见的状态——沉默被解释了，才会变成可信任的。</p></div>
+    <div class="cd"><div class="n2">04</div><h5>让工程缺陷变成产品信息</h5><p>日志里最多的一行是 yfinance 的 <b>Too Many Requests</b>。与其藏起来，不如把数据源健康度摆上界面：主源 / 备源 / 降级中 + 近 24h 成功率。</p></div>
   </div>
 
   <div class="fx-t rv"><span>04</span><h3>核心屏 · 把阈值画进 K 线里</h3></div>
-  <p class="note rv">首页只回答两个问题：<b>我现在亏多少、要不要管</b>——三市场时钟、按偏离度（而非市值）排序的持仓，每一行自带一条四档标尺，游标落在红 / 橙 / 黄 / 绿哪一段，不用读数字就知道。个股详情里，−5 / −10 / −15 / +20 被直接画成色带铺进分时图；「我的」这一屏则把双数据源容灾、限流退避、冷却与静默这些<b>纯工程实现</b>，翻译成用户读得懂、也愿意相信的状态。</p>
+  <p class="note rv">首页只回答两个问题：<b>我现在亏多少、要不要管</b>——持仓按偏离度排序，每行自带四档标尺；个股详情把 −5 / −10 / −15 / +20 画成色带铺进分时图。</p>
   <div class="step rv"><span class="on">三市场时钟</span><i>→</i><span class="on">偏离度排序</span><i>→</i><span class="on">四档标尺</span><i>→</i><span class="on">阈值色带</span><i>→</i><span class="on">数据源健康度</span></div>
   <div class="gr4 rv">
     <div><div class="ph app"><img loading="lazy" src="assets/stockpulse/shots/01-home.png" alt="StockPulse 首页"></div><div class="cap"><i>◆</i>脉搏 · 首页总览与四档标尺</div></div>
@@ -1841,7 +1841,7 @@ body.raw .lbx img.neg{filter:none}
     <div><div class="ph app"><img loading="lazy" src="assets/stockpulse/shots/03-alert.png" alt="StockPulse 预警中心"></div><div class="cap"><i>◆</i>预警中心 · 可回溯时间轴</div></div>
     <div><div class="ph app"><img loading="lazy" src="assets/stockpulse/shots/11-datasource.png" alt="StockPulse 数据源健康度"></div><div class="cap"><i>◆</i>数据源健康度 · 让不可靠可见</div></div>
   </div>
-  <p class="note rv" style="margin-top:18px">完整 7 屏 / 11 态都在下面这台可以点的手机里，这里只留四张最能说明设计决策的屏。</p>
+  <p class="note rv" style="margin-top:18px">完整 7 屏 / 11 态都在下面那台可以点的手机里。</p>
 
   <div class="fx-t rv"><span>05</span><h3>可交互原型</h3></div>
   <div class="lproto rv">
@@ -1852,8 +1852,8 @@ body.raw .lbx img.neg{filter:none}
     <div class="lpx">
       <span class="kx">TRY IT</span>
       <h4>这台手机是可以点的</h4>
-      <p>底部五个 Tab 都能切换，首页的预警条可以跳进预警中心，持仓里的 <b>应流股份</b> 可以点进个股详情看阈值可视化，日报卡片可以展开完整日报。筛选 chips 与开关也都是活的。</p>
-      <p>原型完全用<b>原生 HTML / CSS / SVG 手写</b>，没有用任何设计工具导出——所有图表、脉搏线、阈值色带都是运行时按真实持仓数据算出来画的，改一个成本价，整屏数字和色带会一起变。</p>
+      <p>五个 Tab、预警条、持仓行、日报卡片、筛选 chips 与开关都是活的——点 <b>应流股份</b> 就能进个股详情看阈值可视化。</p>
+      <p>原型完全用<b>原生 HTML / CSS / SVG 手写</b>，没有设计工具导出——图表与色带按真实持仓数据运行时计算，改一个成本价，整屏会一起变。</p>
       <a class="lpbtn" href="assets/stockpulse/proto.html" target="_blank" rel="noopener">打开完整原型（7 屏 / 11 态） ↗</a>
     </div>
   </div>
@@ -1881,20 +1881,20 @@ body.raw .lbx img.neg{filter:none}
   <div class="fx-3 rv">
     <div>
       <span class="kx">挑战</span>
-      <p>做塔罗网页，难的不是画牌，是两件事：解读要<b>可信</b>，不能是随机拼词的星座运势口吻；氛围要<b>沉浸</b>，占卜非常吃感觉。前者是内容结构问题，后者是视觉与动效问题。</p>
+      <p>难的不是画牌：解读要<b>可信</b>，不能是随机拼词的星座口吻；氛围要<b>沉浸</b>。一个是内容结构问题，一个是视觉与动效问题。</p>
     </div>
     <div>
       <span class="kx">解法</span>
-      <p>视觉沿用我自己的 <b>riso 荧光限定套印</b>风格锁，让 43 张自制牌面从头到尾像同一副牌；内容则先建 78 张牌义数据库，再用三重交叉的解读引擎，让每一句话都有出处。</p>
+      <p>视觉沿用我自己的 <b>riso 荧光限定套印</b>风格锁，让 43 张自制牌像同一副；内容先建 78 张牌义库，再用三重交叉的解读引擎，让每句话都有出处。</p>
     </div>
     <div>
       <span class="kx">我做了什么</span>
-      <p>写死一段 style lock prompt 批量出牌面并人工筛选重做；剩下 40 张数字小牌<b>改用代码画</b>；搭牌义库、6 种牌阵与解读引擎；交互做了三版，把点击从 10~15 次压到 2~6 次。</p>
+      <p>写死 style lock 批量出牌并人工重做不达标的；40 张数字小牌<b>改用代码画</b>；搭牌义库、6 种牌阵与解读引擎；交互三版把点击从 10~15 次压到 2~6 次。</p>
     </div>
   </div>
 
   <div class="fx-t rv"><span>01</span><h3>视觉定义 · riso 荧光限定套印</h3></div>
-  <p class="note rv">这套视觉不是为这个项目新做的，是我一直在用的<b>个人风格锁</b>：黑场压到 #07070a，纸块米白 #f2ece0，颜色只给四支荧光限定色，粗网点半调铺底，再把<b>品红图层向左、荧光绿图层向上</b>推出套印错位，补上纸张颗粒与规线出血标记。零圆角、零渐变，参考语汇是 1970s 科学图鉴 × 神秘学。</p>
+  <p class="note rv">我一直在用的<b>个人风格锁</b>：黑场 + 米白纸块 + 四支荧光限定色，粗网点铺底，<b>品红左移 / 荧光绿上移</b>做出套印错位。零圆角、零渐变，参考 1970s 科学图鉴 × 神秘学。</p>
   <div class="skills rv">
     <span class="sk">黑场 #07070a</span><span class="sk">纸块 #f2ece0</span><span class="sk">四支荧光限定色</span>
     <span class="sk g">粗网点半调</span><span class="sk g">品红左移 / 荧光绿上移</span><span class="sk g">规线与出血标记</span><span class="sk g">2:3 竖版统一</span>
@@ -1905,15 +1905,15 @@ body.raw .lbx img.neg{filter:none}
   </div>
 
   <div class="fx-t rv"><span>02</span><h3>牌面生成链路 · AI 出量，人定风格</h3></div>
-  <p class="note rv">43 张牌面全部自己生成：<b>22 张大阿卡纳 + 16 张宫廷牌 + 1 张牌背 + 4 个花色徽记</b>。关键不是提示词写得多花，而是把风格锁写死之后就不再改——同一段 style lock 反复复用，出来的牌才像同一副。</p>
+  <p class="note rv">43 张牌面全部自己生成：<b>22 张大阿卡纳 + 16 张宫廷牌 + 1 张牌背 + 4 个花色徽记</b>。关键不是提示词写得花，而是风格锁写死之后就不再改。</p>
   <div class="flow rv">
     <div class="stg">
       <div class="no">STAGE 01</div>
       <h4>风格锁</h4>
       <div class="en">Style Lock</div>
       <ul>
-        <li>一段固定的 style lock prompt 存成文件，每次生成直接复用</li>
-        <li>写死米白纸底 + 纯黑内嵌画板，硬禁文字 / 数字 / 水印</li>
+        <li>固定 style lock prompt 存档，每次直接复用</li>
+        <li>米白纸底 + 纯黑画板，禁文字 / 数字 / 水印</li>
       </ul>
     </div>
     <div class="arw2">→</div>
@@ -1922,8 +1922,8 @@ body.raw .lbx img.neg{filter:none}
       <h4>批量生成</h4>
       <div class="en">Batch Generation</div>
       <ul>
-        <li>大阿卡纳、宫廷牌、徽记与牌背分批出图，prompts 分别留档</li>
-        <li>牌面量大，先追求一致性，再追求单张好看</li>
+        <li>大阿卡纳 / 宫廷牌 / 徽记 / 牌背分批出图，prompts 留档</li>
+        <li>先要一致性，再要单张好看</li>
       </ul>
     </div>
     <div class="arw2">→</div>
@@ -1932,8 +1932,8 @@ body.raw .lbx img.neg{filter:none}
       <h4>筛选与重做</h4>
       <div class="en">Curation</div>
       <ul>
-        <li>战车、力量等风格不达标或撞名的几张，重写提示词重做</li>
-        <li>逐张核对套印错位与配色，统一压缩到 6MB 内上线</li>
+        <li>不达标或撞名的几张重写提示词重做</li>
+        <li>逐张核对错位与配色，压到 6MB 内上线</li>
       </ul>
     </div>
   </div>
@@ -1946,7 +1946,7 @@ body.raw .lbx img.neg{filter:none}
   </div>
 
   <div class="fx-t rv"><span>03</span><h3>取舍 · 40 张数字小牌不生成，用代码画</h3></div>
-  <p class="note rv">78 张里剩下的 40 张数字小牌（每个花色 Ace 到 10），我没让 AI 画，改成用四个花色徽记图按<b>传统韦特体系的 pip 排布</b>程序化渲染：徽记去黑底后叠在纯黑画板上，配同一套网点、内规线与四角标记。既省掉 40 次生成与筛选，又让这 40 张<b>绕开随机性、绝对统一</b>——该用 AI 的地方用 AI，该用代码的地方用代码。去黑底返工过一次：最初用 <b>mix-blend-mode: screen</b> 滤黑底，遇到逆位牌整张 180° 旋转就不可靠，后来换成带 alpha 通道的徽记图层。</p>
+  <p class="note rv">剩下 40 张数字小牌没让 AI 画，改用四个花色徽记按<b>韦特体系 pip 排布</b>程序化渲染：省掉 40 次生成与筛选，还<b>绕开随机性、绝对统一</b>——该用 AI 的地方用 AI，该用代码的地方用代码。</p>
   <div class="step rv"><span class="on">花色徽记</span><i>→</i><span class="on">去黑底</span><i>→</i><span class="on">pip 坐标表</span><i>→</i><span class="on">按张数排布</span><i>→</i><span class="on">成牌</span></div>
   <div class="sub-t rv"><em>RENDERED BY CODE</em><h4>由代码画出来的四张小牌</h4><s></s></div>
   <div class="gr4 rv">
@@ -1961,12 +1961,12 @@ body.raw .lbx img.neg{filter:none}
   </div>
 
   <div class="fx-t rv"><span>04</span><h3>内容层 · 可信度是结构问题</h3></div>
-  <p class="note rv">解读读起来像不像真的，不取决于形容词，取决于数据结构。所以先把 78 张牌的牌义拆成字段：正逆位关键词、核心牌义、释义、建议、领域指向与元素归属；再让单张解读由<b>牌位语义 × 提问领域 × 正逆位</b>三重交叉生成，而不是从句子池里随机拽一条。</p>
+  <p class="note rv">解读像不像真的，不取决于形容词，取决于数据结构。78 张牌义先拆成字段，再让单张解读由<b>牌位语义 × 提问领域 × 正逆位</b>三重交叉生成，而不是从句子池里随机拽一条。</p>
   <div class="arch rv">
-    <div class="nd"><div class="dot"></div><b>78 张牌义库</b><p>每张牌都有结构化字段：关键词、核心牌义、正逆位释义、建议与领域指向</p></div>
-    <div class="nd"><div class="dot"></div><b>6 种牌阵</b><p>从 1 张到 10 张，每个牌位带自己的语义，同一张牌落在不同牌位说的不是一件事</p></div>
-    <div class="nd"><div class="dot"></div><b>三重交叉</b><p>牌位语义 × 提问领域 × 正逆位，先生成单张解读，避开通用套话</p></div>
-    <div class="nd"><div class="dot"></div><b>综合解读</b><p>再合成一句话结论、能量结构、牌面张力、盲点提醒与三件可执行的行动</p></div>
+    <div class="nd"><div class="dot"></div><b>78 张牌义库</b><p>结构化字段：关键词、牌义、正逆位释义、建议与领域</p></div>
+    <div class="nd"><div class="dot"></div><b>6 种牌阵</b><p>1~10 张，每个牌位自带语义，同一张牌在不同位置说的不是一件事</p></div>
+    <div class="nd"><div class="dot"></div><b>三重交叉</b><p>牌位 × 领域 × 正逆位，先出单张解读，避开套话</p></div>
+    <div class="nd"><div class="dot"></div><b>综合解读</b><p>再合成结论、能量结构、盲点提醒与三件可执行的行动</p></div>
   </div>
   <div class="skills rv">
     <span class="sk">定心 · 1 张</span><span class="sk">时间 · 3 张</span><span class="sk">二选一 · 5 张</span><span class="sk">凯尔特十字 · 10 张</span>
@@ -1974,7 +1974,7 @@ body.raw .lbx img.neg{filter:none}
   </div>
 
   <div class="fx-t rv"><span>05</span><h3>交互的三次迭代 · 少点击与仪式感的拉扯</h3></div>
-  <p class="note rv">同一个产品我重做了三版交互，每一版都是在同一对矛盾里重新找平衡点：<b>减负会不会把占卜的仪式感一起减掉</b>。</p>
+  <p class="note rv">同一个产品重做了三版交互，每版都在同一对矛盾里找平衡：<b>减负会不会把仪式感一起减掉</b>。</p>
   <div class="flow rv">
     <div class="stg">
       <div class="no">V1</div>
@@ -1982,7 +1982,7 @@ body.raw .lbx img.neg{filter:none}
       <div class="en">Too Many Steps</div>
       <ul>
         <li>首页 → 四道选择题 → 选牌阵 → 抽牌 → 逐张翻牌 → 解读</li>
-        <li>看到解读要点 <b>10~15 次</b>、跳 5 个页面，人还没进入状态就在填表</li>
+        <li>点 <b>10~15 次</b>、跳 5 个页面，人还没进入状态就在填表</li>
       </ul>
     </div>
     <div class="arw2">→</div>
@@ -2001,29 +2001,13 @@ body.raw .lbx img.neg{filter:none}
       <h4>单主舞台换场</h4>
       <div class="en">Stage, In Progress</div>
       <ul>
-        <li>一页长滚虽然快，但丢了空间感；改成主舞台换场 + 常驻返回</li>
-        <li>加回仪式感：牌堆呼吸浮动、弹性缓动抽牌、错帧翻牌、套印图层漂移</li>
+        <li>一页长滚快但丢了空间感，改成主舞台换场 + 常驻返回</li>
+        <li>加回仪式感：牌堆呼吸、弹性抽牌、错帧翻牌、套印漂移</li>
       </ul>
     </div>
   </div>
-  <div class="qt rv" style="margin-top:26px">「少点击」和「仪式感」是一对矛盾。<b>减负不能减掉塔罗本身的仪式核心</b>——抽牌前的那几秒安静、翻牌那一下的重量，都是体验的一部分，不是可以优化掉的步骤。</div>
 
-  <div class="fx-t rv"><span>06</span><h3>这个项目让我确认的三件事</h3></div>
-  <div class="fx-3 rv">
-    <div>
-      <span class="kx">AI 的位置</span>
-      <p>AI 生图负责「量与统一」，人负责「定风格锁与筛选」。风格锁一旦写死，批量才会变成优势；否则量越大、风格越杂。</p>
-    </div>
-    <div>
-      <span class="kx">可信度是结构</span>
-      <p>内容的可信感来自字段与交叉规则，不来自修饰。结构没搭好，文案写得再好也只是星座口吻。</p>
-    </div>
-    <div>
-      <span class="kx">减负有底线</span>
-      <p>每一次把步骤变短，都要回头确认体验的核心快感还在不在。快不是目的，快只是手段。</p>
-    </div>
-  </div>
-  <p class="note rv" style="margin-top:26px">→ <a href="https://yanyuhan223-a11y.github.io/arcana-oracle/" target="_blank" rel="noopener" style="color:#ff3b3b;border-bottom:1px solid rgba(255,59,59,.5)">打开线上塔罗占卜页面</a>　（整副 78 张牌、6 种牌阵、留空也能直接抽；这里只放了少量代表性牌面，完整视觉都在线上）</p>
+  <p class="note rv" style="margin-top:26px">→ <a href="https://yanyuhan223-a11y.github.io/arcana-oracle/" target="_blank" rel="noopener" style="color:#ff3b3b;border-bottom:1px solid rgba(255,59,59,.5)">打开线上塔罗占卜页面</a>　（整副 78 张牌、6 种牌阵，留空也能直接抽；这里只放代表性牌面）</p>
 </section>
 
 
