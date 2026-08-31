@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo - 液态金属首屏</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Noto Serif SC',serif;
+  background:radial-gradient(ellipse at 30% 20%,#fff5f0 0%,#f8ede3 40%,#f0e6d8 70%,#e8ddd0 100%);
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+.hero{position:relative;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
+.metal-wrap{position:relative;text-align:center;animation:floatBody 8s ease-in-out infinite}
+@keyframes floatBody{0%,100%{transform:translateY(0) rotate(-0.5deg)}50%{transform:translateY(-18px) rotate(0.5deg)}}
+.metal-text{
+  font-size:clamp(56px,11vw,140px);
+  font-weight:900;
+  letter-spacing:-2px;
+  line-height:1.05;
+  display:inline-block;
+  background:linear-gradient(165deg,#ffffff 0%,#e8e8e8 12%,#f5f5f5 25%,#c0c0c0 38%,#ffffff 50%,#a8a8a8 62%,#e0e0e0 75%,#b8b8b8 88%,#f0f0f0 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:
+    -1px -1px 1px rgba(255,255,255,0.9),
+    -2px -2px 2px rgba(255,255,255,0.5),
+    0 1px 0 #d0d0d0,0 2px 0 #c0c0c0,0 3px 0 #b0b0b0,0 4px 0 #a0a0a0,
+    0 5px 0 #909090,0 6px 0 #808080,0 7px 0 #707070,
+    0 12px 25px rgba(0,0,0,0.25),0 24px 50px rgba(0,0,0,0.12);
+  filter:drop-shadow(0 8px 30px rgba(0,0,0,0.15));
+}
+.metal-sub{
+  margin-top:18px;font-size:clamp(14px,2.2vw,22px);font-weight:400;letter-spacing:6px;color:#a09080;opacity:0.85;
+  animation:fadeUp 1.2s ease-out 0.3s both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:0.85;transform:translateY(0)}}
+.deco{position:absolute;pointer-events:none;z-index:2}
+.bow{top:18%;left:12%;width:clamp(40px,6vw,90px);animation:decoFloat1 7s ease-in-out infinite}
+@keyframes decoFloat1{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+.star{top:22%;right:15%;font-size:clamp(20px,3vw,40px);color:#c9a96e;animation:decoFloat2 6s ease-in-out infinite 0.5s}
+@keyframes decoFloat2{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.15)}}
+.dot-r{bottom:28%;left:18%;width:clamp(10px,1.8vw,22px);height:clamp(10px,1.8vw,22px);background:#e8453a;border-radius:50%;animation:decoFloat3 5s ease-in-out infinite 0.2s}
+.dot-y{bottom:22%;right:22%;width:clamp(8px,1.5vw,18px);height:clamp(8px,1.5vw,18px);background:#f0c040;border-radius:50%;animation:decoFloat3 6.5s ease-in-out infinite 1s}
+.dot-b{top:38%;left:8%;width:clamp(7px,1.2vw,15px);height:clamp(7px,1.2vw,15px);background:#4a7bff;border-radius:50%;animation:decoFloat3 5.5s ease-in-out infinite 0.7s}
+@keyframes decoFloat3{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.fish{bottom:20%;right:10%;width:clamp(50px,8vw,120px);animation:fishFloat 9s ease-in-out infinite}
+@keyframes fishFloat{0%,100%{transform:translateY(0) rotate(12deg)}50%{transform:translateY(-16px) rotate(-4deg)}}
+.note1{top:14%;right:22%;width:clamp(50px,7vw,100px);height:clamp(35px,5vw,70px);background:#fff3a0;transform:rotate(8deg);box-shadow:2px 4px 12px rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;font-family:cursive;font-size:clamp(10px,1.4vw,16px);color:#5a5040;animation:decoFloat1 8s ease-in-out infinite 0.3s}
+.note2{bottom:30%;left:24%;width:clamp(45px,6vw,85px);height:clamp(30px,4vw,55px);background:#ffd1dc;transform:rotate(-6deg);box-shadow:2px 4px 12px rgba(0,0,0,0.1);animation:decoFloat2 7.5s ease-in-out infinite 0.6s}
+.planet{top:32%;left:22%;width:clamp(14px,2vw,28px);height:clamp(14px,2vw,28px);border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0%,#e0c8a8 40%,#c0a080 100%);box-shadow:0 2px 8px rgba(0,0,0,0.15);animation:decoFloat3 7s ease-in-out infinite 0.4s}
+.ring{top:26%;right:28%;width:clamp(18px,2.5vw,35px);height:clamp(18px,2.5vw,35px);border:2px solid rgba(200,180,160,0.4);border-radius:50%;animation:decoFloat1 5.5s ease-in-out infinite 0.8s}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:3px;color:#b0a090;opacity:0.6;animation:fadeUp 1.5s ease-out 1s both}
+@media(max-width:640px){
+  .metal-text{font-size:clamp(40px,14vw,90px);letter-spacing:-1px}
+  .metal-sub{letter-spacing:3px;font-size:13px}
+  .bow{top:12%;left:6%}
+  .star{top:10%;right:8%}
+  .fish{bottom:15%;right:4%;width:clamp(40px,12vw,80px)}
+  .note1,.note2{display:none}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="deco bow">
+    <svg viewBox="0 0 100 80" fill="none"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="50%" stop-color="#f0d878"/><stop offset="100%" stop-color="#b8962e"/></linearGradient></defs><path d="M50 35c8-12 25-20 40-15 8 2 12 10 8 18-4 10-20 12-30 8-5-2-8-5-10-8-2 3-5 6-10 8-10 4-26 2-30-8-4-8 0-16 8-18 15-5 32 3 40 15z" fill="url(#bg)"/><path d="M50 35v20" stroke="#b8962e" stroke-width="3" stroke-linecap="round"/><ellipse cx="50" cy="38" rx="6" ry="5" fill="#e8c84a"/></svg>
+  </div>
+  <div class="deco star">&#x2726;</div>
+  <div class="deco dot-r"></div>
+  <div class="deco dot-y"></div>
+  <div class="deco dot-b"></div>
+  <div class="deco fish">
+    <svg viewBox="0 0 120 60" fill="none"><ellipse cx="60" cy="30" rx="55" ry="22" fill="url(#fishg)"/><defs><linearGradient id="fishg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e0e0e0"/><stop offset="40%" stop-color="#c0c0c0"/><stop offset="70%" stop-color="#a0a0a0"/><stop offset="100%" stop-color="#808080"/></linearGradient></defs><path d="M105 30l12-8v16l-12-8z" fill="#b0b0b0"/><circle cx="25" cy="26" r="3" fill="#fff"/><circle cx="23" cy="25" r="1" fill="#333"/></svg>
+  </div>
+  <div class="deco note1">Art</div>
+  <div class="deco note2"></div>
+  <div class="deco planet"></div>
+  <div class="deco ring"></div>
+  <div class="metal-wrap">
+    <div class="metal-text">VIVIENNE</div>
+    <div class="metal-sub">颜于涵 / AI DESIGNER & ARTIST</div>
+  </div>
+  <div class="scroll-hint">SCROLL TO EXPLORE</div>
+</div>
+</body>
+</html>
