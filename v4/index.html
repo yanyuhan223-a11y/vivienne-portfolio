@@ -580,39 +580,37 @@ td.md{font-size:11.5px;line-height:1.85;color:#a29d97;font-weight:200}
 
 
 
-/* article 右侧配图，左边渐变虚化融进页面 */
+/* ===== article 右侧配图：与左侧文字块等高、仅靠文字一侧（左）水平渐隐融入页面 ===== */
 .row.hasimg{position:relative;overflow:hidden}
 
 .row.hasimg>*:not(.rimg){position:relative;z-index:1}
 
 .row.hasimg .side{max-width:620px}
 
-.row.hasimg{min-height:430px}
+/* 桌面：三栏 年份 | 文字 | 配图；align-items:stretch 使配图列高度 = 文字块高度 */
+.row.hasimg.txt{grid-template-columns:150px minmax(0,1fr) clamp(320px,32%,460px);align-items:stretch;min-height:0}
+.row.hasimg.txt .yr{grid-column:1;grid-row:1}
+.row.hasimg.txt .side{grid-column:2;grid-row:1}
+.row.hasimg .rimg{grid-column:3;grid-row:1;position:relative;align-self:stretch;overflow:hidden;pointer-events:none;z-index:0}
 
-/* 两栏等高：行高由文字内容决定，图片内缩到与文字同一内容盒，底边与文字底边齐平 */
-.row.hasimg.eqh{min-height:0}
-.row.hasimg.eqh .rimg{top:62px;bottom:62px}
-@media(max-width:820px){.row.hasimg.eqh .rimg{top:0;bottom:0}}
+/* 图片撑满配图列，object-fit:cover 满铺不留白，仅左侧（靠文字）水平渐隐 */
+.row.hasimg .rimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 26%;display:block;opacity:.96;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.16) 16%,rgba(0,0,0,.66) 46%,#000 78%);
+  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.16) 16%,rgba(0,0,0,.66) 46%,#000 78%)}
 
-.row .rimg{position:absolute;right:0;top:0;bottom:0;width:auto;z-index:0;pointer-events:none}
+/* 每张封面的裁切焦点 */
+.row.hasimg.cov-style .rimg img{object-position:52% 20%}   /* 彩铅风：人物面部偏上 */
+.row.hasimg.cov-music .rimg img{object-position:80% 50%}   /* AI 音乐：红胶唱片偏右 */
+.row.hasimg.cov-photo .rimg img{object-position:50% 20%}   /* AI 写真：人物面部 */
 
-.row .rimg img{height:100%;width:auto;display:block;opacity:.95;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.18) 18%,rgba(0,0,0,.6) 42%,rgba(0,0,0,.92) 70%,#000 100%);
-  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.18) 18%,rgba(0,0,0,.6) 42%,rgba(0,0,0,.92) 70%,#000 100%)}
-
-.row .rimg.soft{width:42%;max-width:none;top:62px;bottom:62px;display:flex;align-items:flex-start;justify-content:flex-end;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
-
-.row .rimg.soft img{width:100%;height:auto;max-height:100%;object-fit:contain;
-  filter:brightness(.82) contrast(1.05) saturate(.95);opacity:.96;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.22) 26%,rgba(0,0,0,.72) 58%,#000 88%);
-  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.22) 26%,rgba(0,0,0,.72) 58%,#000 88%)}
-@media (max-width:1100px){.row .rimg{opacity:.45}
-.row.hasimg .side{max-width:none}
+/* 平板：回落为文字后方的淡色背景配图（绝对定位、仅左向渐隐） */
+@media (max-width:1120px){
+  .row.hasimg.txt{grid-template-columns:96px minmax(0,1fr)}
+  .row.hasimg.txt .yr{grid-column:1;grid-row:auto}
+  .row.hasimg.txt .side{grid-column:1/-1;grid-row:auto;max-width:none}
+  .row.hasimg.txt .rimg{position:absolute;grid-column:auto;grid-row:auto;right:0;left:auto;top:0;bottom:0;width:54%;align-self:auto;opacity:.42;z-index:0}
 }
-@media (max-width:760px){.row .rimg{opacity:.4}
-}
+@media (max-width:760px){.row.hasimg.txt .rimg{opacity:.4}}
 
 
 /* AI 风格化头图：原图不裁切，同图模糊延展补宽 */
@@ -1748,7 +1746,6 @@ body.raw .lbx img.neg{filter:none}
   .row.hasimg .rimg img{
     -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.1) 22%,rgba(0,0,0,.5) 52%,#000 100%);
     mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.1) 22%,rgba(0,0,0,.5) 52%,#000 100%)}
-  .row.hasimg .rimg.soft{width:62%;top:34px;bottom:34px;opacity:.5}
   .row.hasimg .side{position:relative;z-index:2}
 }
 
@@ -2946,12 +2943,12 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
   <div class="cap rv" style="margin-top:10px"><i>◆</i>同一角色的多题材图像玩法</div>
   <div class="sub-t rv"><em>VIDEO</em><h4>视频玩法</h4><s></s></div>
   <div class="gr6 rv">
-    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-1-poster.jpg" controls playsinline><source src="../assets/oc/mv-1.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-2-poster.jpg" controls playsinline><source src="../assets/oc/mv-2.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-3-poster.jpg" controls playsinline><source src="../assets/oc/mv-3.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-4-poster.jpg" controls playsinline><source src="../assets/oc/mv-4.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-5-poster.jpg" controls playsinline><source src="../assets/oc/mv-5.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-6-poster.jpg" controls playsinline><source src="../assets/oc/mv-6.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-1-poster.jpg" controls playsinline><source src="../assets/oc/mv-1.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-2-poster.jpg" controls playsinline><source src="../assets/oc/mv-2.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-3-poster.jpg" controls playsinline><source src="../assets/oc/mv-3.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-4-poster.jpg" controls playsinline><source src="../assets/oc/mv-4.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-5-poster.jpg" controls playsinline><source src="../assets/oc/mv-5.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-6-poster.jpg" controls playsinline><source src="../assets/oc/mv-6.mp4" type="video/mp4"></video></div></div>
   </div>
   <div class="cap rv" style="margin-top:10px"><i>▶︎</i>基于分镜链路产出的视频作品</div>
 </section>
@@ -3064,7 +3061,7 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
 </div>
 
 
-<article class="row hasimg eqh txt rv">
+<article class="row hasimg cov-style txt rv">
   <div class="rimg" aria-hidden="true"><img src="../assets/style-hero.jpg" alt=""></div>
   <div class="yr">2024 — 2025<span class="tg">特效玩法 · S- 爆款</span></div>
   <div class="side">
@@ -3098,8 +3095,8 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
 </div>
 
 
-<article class="row hasimg txt rv">
-  <div class="rimg soft" aria-hidden="true"><img src="../assets/v4/music-cover.jpg" alt=""></div>
+<article class="row hasimg cov-music txt rv">
+  <div class="rimg" aria-hidden="true"><img src="../assets/v4/music-cover.jpg" alt=""></div>
   <div class="yr">2024 — 2025<span class="tg">特效玩法 · S- 爆款</span></div>
   <div class="side">
     <h3>AI 音乐 · 「AI 我的新年单曲」<span class="arw">↗︎</span></h3>
@@ -3141,8 +3138,8 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
 </div>
 
 
-<article class="row hasimg txt rv">
-  <div class="rimg soft" aria-hidden="true"><img src="../assets/photo-hero.jpg" alt=""></div>
+<article class="row hasimg cov-photo txt rv">
+  <div class="rimg" aria-hidden="true"><img src="../assets/photo-hero.jpg" alt=""></div>
   <div class="yr">2023 — 2024<span class="tg">核心项目 · 公司首个真人 AI 玩法</span></div>
   <div class="side">
     <h3>轻颜 / 抖音 AI 写真<span class="arw">↗︎</span></h3>
