@@ -1069,8 +1069,8 @@ body.raw .lbx img.neg{filter:none}
    ========================================================================= */
 :root{
   --bg:#efe9e3;
-  --ink:#221d19; --ink-soft:#5f564e;
-  --txt:#221d19; --mut:#5f564e; --faint:#7a6f66;
+  --ink:#221d19; --ink-soft:#4f463f;
+  --txt:#221d19; --mut:#4f463f; --faint:#665c54;
   --hair:rgba(30,25,21,.20);
   --hair-2:rgba(30,25,21,.11);
   --paper:rgba(255,255,255,.55);
@@ -1433,6 +1433,270 @@ ul.dlg li b{color:var(--faint)}
   .fx::before{left:13px;top:48px}
 }
 
+
+/* =========================================================================
+   v4 EDITORIAL LAYOUT LAYER  --  demo3 视觉语言落到正文版式
+   只改壳：排版 / 纸面 / 发丝线 / 字距 / 铬与色点，文案不动
+   ========================================================================= */
+:root{
+  --chrome-grad:linear-gradient(172deg,#7c746c 0%,#2c2621 14%,#6a625a 30%,#d8d2ca 44%,#f4f0ea 50%,#a49c94 56%,#3a332d 72%,#1f1a16 86%,#6e665e 100%);
+  --paper-sheet:linear-gradient(180deg,rgba(255,253,250,.68),rgba(249,244,238,.46));
+  --sheet-sh:0 1px 0 rgba(255,255,255,.75) inset,0 22px 46px -26px rgba(72,56,44,.5);
+}
+
+/* ---- 0. LOADING 幕布 ---- */
+body.locked{overflow:hidden}
+#load{position:fixed;inset:0;z-index:400;background:#cdc5c4;display:flex;
+  align-items:center;justify-content:center;cursor:default;
+  transition:transform 1.15s cubic-bezier(.76,0,.24,1)}
+#load.ready{cursor:pointer}
+#load.go{transform:translateY(-101%)}
+#load .lgrain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E")}
+#load .lnum{font-family:var(--serif);font-size:clamp(64px,14vw,190px);line-height:.9;
+  letter-spacing:-.02em;color:var(--ink);opacity:.9;transition:opacity .5s}
+#load.ready .lnum{opacity:.16}
+#load .lfish{position:absolute;top:calc(50% + 268px);left:50%;transform:translateX(-50%);
+  width:104px;opacity:.42;animation:lswim 3.2s ease-in-out infinite}
+@keyframes lswim{0%,100%{transform:translateX(-50%) translateY(0) rotate(-3deg)}
+  50%{transform:translateX(-46%) translateY(-10px) rotate(3deg)}}
+#load .lcap{position:absolute;bottom:56px;left:50%;transform:translateX(-50%);
+  font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--ink-soft);transition:opacity .4s}
+#load.ready .lcap{opacity:0}
+#load .lrule{position:absolute;left:48px;right:48px;height:1px;background:rgba(30,25,21,.2)}
+#load .lr-t{top:56px}
+#load .lr-b{bottom:56px}
+#load .lcorner{position:absolute;top:30px;font-family:var(--sans);font-size:10px;
+  letter-spacing:.2em;color:#4a423a}
+#load .lc-tl{left:48px}
+#load .lc-tr{right:48px;letter-spacing:.26em;text-transform:uppercase}
+#load .lenter{position:absolute;left:50%;top:calc(50% + 104px);transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:13px;
+  opacity:0;pointer-events:none;transition:opacity .7s .15s}
+#load.ready .lenter{opacity:1}
+#load .lenter i{width:56px;height:56px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#fff,#d9d2cb 40%,#8a837c 100%);
+  box-shadow:0 10px 26px rgba(60,45,35,.3);animation:lpulse 2.6s ease-in-out infinite}
+@keyframes lpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+#load .lenter span{font-family:var(--sans);font-size:12px;letter-spacing:.52em;
+  text-indent:.52em;color:var(--ink)}
+#load .lenter em{font-style:normal;font-family:var(--sans);font-size:9.5px;
+  letter-spacing:.3em;text-indent:.3em;color:var(--clay)}
+@media(max-width:760px){
+  #load .lrule{left:22px;right:22px}
+  #load .lc-tl{left:22px}#load .lc-tr{right:22px}
+  #load .lcorner{font-size:8.6px;letter-spacing:.14em;top:24px}
+  #load .lfish{width:78px;top:calc(50% + 236px)}
+  #load .lenter i{width:48px;height:48px}
+}
+
+/* ---- 1. 全页发丝线版框 + 书脊竖排标签 ---- */
+.pgframe{position:fixed;inset:0;z-index:70;pointer-events:none}
+.pgframe i{position:absolute;top:0;bottom:0;width:1px;background:rgba(30,25,21,.10)}
+.pgframe i.l{left:26px}
+.pgframe i.r{right:26px}
+.spine{position:fixed;left:14px;top:50%;z-index:71;pointer-events:none;
+  transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;
+  font-family:var(--sans);font-size:9px;letter-spacing:.44em;text-transform:uppercase;
+  color:rgba(52,45,39,.6)}
+@media(max-width:1280px){.pgframe,.spine{display:none}}
+
+/* ---- 2. HERO：四角标签 / 下发丝线 / 走马灯 ---- */
+.hero{padding-bottom:96px}
+.hero .hero-deco2{position:absolute;left:44px;right:44px;bottom:56px;height:1px;
+  background:var(--hair);z-index:3}
+.hlbl{position:absolute;z-index:5;font-family:var(--sans);font-size:10.5px;
+  letter-spacing:.26em;color:#4a423a;text-transform:uppercase;
+  text-shadow:0 0 12px rgba(239,233,227,.85)}
+.hl-tr{right:44px;top:30px}
+.hl-bl{left:44px;bottom:30px;text-transform:none;letter-spacing:.14em}
+.hl-br{right:44px;bottom:30px}
+.hmarq{position:absolute;left:0;right:0;bottom:92px;z-index:4;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.hmarq div{display:inline-flex;white-space:nowrap;animation:hslide 46s linear infinite}
+.hmarq span{font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;color:#39312a;
+  text-transform:uppercase;padding:0 26px}
+.hmarq span::after{content:'\25C6';font-size:6px;margin-left:26px;color:var(--clay);
+  opacity:.55;vertical-align:middle}
+@keyframes hslide{to{transform:translateX(-50%)}}
+@media(max-width:1000px){.hl-tr,.hl-br{display:none}}
+@media(max-width:820px){
+  .hlbl{left:20px;right:auto;font-size:8.6px;letter-spacing:.1em}
+  .hl-bl{bottom:26px}
+  .hero .hero-deco2{left:20px;right:20px;bottom:48px}
+  .hmarq{bottom:78px}
+  .hmarq span{font-size:9px;letter-spacing:.2em;padding:0 16px}
+  .hmarq span::after{margin-left:16px}
+}
+
+/* ---- 3. 指标条：去卡片化 -> 台账式左对齐 ---- */
+.stats{background:transparent;padding:0 44px;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.st{text-align:left;padding:42px 16px 38px;border-left:1px solid var(--hair-2)}
+.st:first-child{padding-left:0}
+.st:last-child{padding-right:0}
+.st:hover{background:rgba(255,255,255,.34)}
+.st b{font-family:var(--serif);font-size:clamp(24px,2.62vw,38px);letter-spacing:-.015em;white-space:nowrap}
+.st span{margin-top:14px;font-size:9px;letter-spacing:.2em;line-height:1.85}
+.st::before{content:'';display:block;width:16px;height:1px;background:var(--clay);
+  opacity:.65;margin-bottom:16px}
+
+/* ---- 4. 章节抬头：两栏不对称 + 竖排编号标签 ---- */
+.chapter{display:grid;grid-template-columns:128px minmax(0,1fr);column-gap:46px;
+  align-items:start;padding:150px 44px 26px}
+.chapter .idx{grid-column:1;grid-row:1 / span 3;justify-self:start;align-self:start;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--sans);font-size:9.5px;letter-spacing:.42em;color:var(--clay);
+  padding:4px 0 0;margin-top:6px;
+  border-right:1px solid var(--hair-2)}
+.chapter .hl{grid-column:2;grid-row:1;margin-top:0;align-items:flex-end}
+.chapter .rl{grid-column:2;grid-row:2}
+.chapter p.sm{grid-column:2;grid-row:3;max-width:620px}
+.chapter h2{font-size:clamp(46px,8vw,128px);line-height:.82;letter-spacing:-.014em}
+.chapter .rule{margin-bottom:22px}
+.chapter .hl::after{bottom:30px}
+.chapter::before{top:104px;left:auto;right:44px}
+.chapter::after{top:104px;left:auto;right:31px;background:#1b4fd8}
+@media(max-width:820px){
+  .chapter{grid-template-columns:1fr;column-gap:0;row-gap:0;padding:104px 20px 22px}
+  .chapter .idx{grid-column:1;grid-row:auto;writing-mode:horizontal-tb;transform:none;
+    border-right:0;border-left:2px solid var(--clay);padding:0 0 0 10px;margin:0 0 14px}
+  .chapter .hl,.chapter .rl,.chapter p.sm{grid-column:1;grid-row:auto}
+  .chapter::before{right:20px;top:70px}
+  .chapter::after{right:7px;top:70px}
+}
+
+/* ---- 5. FEATURED CASE：铬字标题 + 台账式元信息 ---- */
+.fx{padding-top:126px}
+.fx .idx{display:flex;align-items:center;gap:16px}
+.fx .idx::before{content:'';width:26px;height:1px;background:var(--clay);opacity:.7;flex:none}
+.fx .idx::after{content:'';flex:1;height:1px;background:var(--hair-2)}
+.fx h2{font-size:clamp(38px,5.6vw,84px);line-height:.94;letter-spacing:-.014em;margin-top:14px;
+  background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 1px rgba(255,255,255,.7)) drop-shadow(0 6px 16px rgba(72,56,44,.22))}
+@supports not (-webkit-background-clip:text){.fx h2{color:var(--ink);-webkit-text-fill-color:currentColor}}
+.fx .one{position:relative;padding-left:26px;margin-top:22px;
+  font-size:clamp(15px,1.65vw,20px);line-height:1.9}
+.fx .one::before{content:'';position:absolute;left:0;top:.72em;width:12px;height:1px;
+  background:var(--clay)}
+.fx-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:transparent;
+  border:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair-2);margin-top:38px}
+.fx-meta div{background:transparent;padding:20px 22px 20px 20px;border-left:1px solid var(--hair-2)}
+.fx-meta div:first-child{border-left:0;padding-left:0}
+.fx-meta span{font-size:9px;letter-spacing:.3em;margin-bottom:9px}
+.fx-meta b{font-size:13px;line-height:1.75}
+.fx-kv{border:0;box-shadow:0 26px 54px -28px rgba(72,56,44,.55)}
+.fx::before{left:auto;right:44px;top:88px;background:#f0c43a}
+.fx::after{content:'';position:absolute;right:57px;top:88px;width:5px;height:5px;
+  border-radius:50%;background:#1b4fd8;opacity:.7}
+@media(max-width:900px){
+  .fx-meta{grid-template-columns:1fr 1fr}
+  .fx-meta div{border-top:1px solid var(--hair-2)}
+  .fx-meta div:nth-child(-n+2){border-top:0}
+  .fx-meta div:nth-child(odd){border-left:0;padding-left:0}
+}
+@media(max-width:820px){.fx::before{right:20px;top:66px}.fx::after{right:7px;top:66px}}
+
+/* ---- 6. 小标题：大字距 + 发丝线 + 黄铜菱形 ---- */
+.fx-t{margin:78px 0 24px;gap:14px}
+.fx-t span{font-size:9px;letter-spacing:.34em}
+.fx-t h3{font-size:24px;letter-spacing:.01em}
+.fx-t::before{content:'\25C6';font-size:6px;color:var(--clay);opacity:.6;flex:none}
+.sub-t{margin:38px 0 14px}
+.sub-t h4{font-size:18px}
+.sub-t em{font-size:9px;letter-spacing:.3em}
+.kx{display:flex;align-items:center;gap:11px;font-size:9px;letter-spacing:.32em}
+.kx::after{content:'';flex:1;height:1px;background:var(--hair-2)}
+.mtb .mtt,.proto2 .mtt{font-size:9px;letter-spacing:.3em}
+.deep .fh b,.fdg .fh b{font-family:var(--serif);font-size:19px;letter-spacing:.06em}
+.deep .fh i,.fdg .fh i{font-family:var(--sans);font-size:9px;letter-spacing:.28em;text-transform:uppercase}
+
+/* ---- 7. 卡片去框：只留顶部发丝线与留白 ---- */
+.stg,.nd,.cd,.ecd,.met,.mx,.fcard,.dcard,.fnode{
+  background:transparent!important;border:0;border-radius:0;
+  border-top:1px solid var(--hair-2);padding:20px 18px 22px 0}
+.stg:hover,.nd:hover,.cd:hover{background:rgba(255,255,255,.30)!important;border-color:var(--clay)}
+.stg{padding:22px 20px 24px 0}
+.nd{border-top:1px dashed var(--hair);text-align:left;padding:20px 14px 20px 0}
+.nd .dot{left:0;translate:0 0;top:-3px}
+.cd{border-top:1px solid var(--clay);padding:20px 20px 22px 0}
+.ecd{border-top:2px solid rgba(158,58,38,.45);padding:16px 14px 18px 0}
+.met{border-top:1px solid var(--hair);padding:18px 14px 18px 0}
+.met b{font-size:clamp(26px,2.8vw,38px);letter-spacing:-.01em}
+.met span{margin-top:9px;font-size:10px;letter-spacing:.12em}
+.fnode{border-top:1px solid var(--hair-2);padding:12px 16px;text-align:center;
+  border-left:1px solid var(--hair-2);border-right:1px solid var(--hair-2)}
+.dcard{border-top:1px solid var(--hair-2);padding:16px 12px 14px;text-align:center}
+.flow{gap:0}
+.stg{border-left:1px solid var(--hair-2);padding-left:22px}
+.flow>.stg:first-child{border-left:0;padding-left:0}
+.qsteps{background:transparent;border:0;border-top:1px solid var(--hair);gap:0}
+.qs{background:transparent;border-left:1px solid var(--hair-2);border-bottom:1px solid var(--hair-2)}
+.qs:hover{background:rgba(255,255,255,.34)}
+.qs:nth-child(odd){border-left:0}
+
+/* ---- 8. 纸面 sheet：深度块 / 图表 / 原型块 ---- */
+.deep,.fdg,.lproto,.plist,.quad,.astage,.shero{
+  border:0!important;border-radius:2px;
+  background:var(--paper-sheet)!important;box-shadow:var(--sheet-sh)}
+.deep{position:relative;overflow:hidden;padding:34px 34px 36px}
+.deep::before{content:'';position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
+  opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)' opacity='0.05'/%3E%3C/svg%3E")}
+.deep>*{position:relative;z-index:1}
+.shero::after{background:linear-gradient(90deg,rgba(249,245,240,.9),rgba(249,245,240,.6))}
+@media(max-width:640px){.deep{padding:22px 18px 26px}}
+
+/* ---- 9. 图片：去卡纸装裱，改为齐边版面 + 发丝线内框 ---- */
+.ph{padding:0;background:transparent;border-radius:0;
+  box-shadow:0 18px 38px -24px rgba(72,56,44,.55)}
+.ph::before{inset:0;box-shadow:inset 0 0 0 1px rgba(30,25,21,.16)}
+.ph::after{inset:0;background:linear-gradient(180deg,rgba(255,252,247,.16),transparent 26%,
+  transparent 74%,rgba(96,80,66,.12));mix-blend-mode:normal}
+.ph img{filter:saturate(.94) contrast(1.02)}
+.ph:hover{transform:translateY(-4px);box-shadow:0 26px 52px -22px rgba(72,56,44,.6)}
+.ph:hover::before{box-shadow:inset 0 0 0 1px rgba(158,58,38,.5)}
+.ph.app,.ph.riso{padding:0;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(248,243,237,.34))}
+.ph.app::before,.ph.riso::before{inset:0;box-shadow:inset 0 0 0 1px rgba(30,25,21,.16)}
+.gal .ph{padding:0}.gal .ph::after,.gal .ph::before{inset:0}
+.gr6 .ph{padding:0}
+body.raw .ph{background:transparent}
+body.raw .ph.app{background:rgba(255,255,255,.42)}
+.cap{margin-top:11px;font-size:9px;letter-spacing:.24em}
+.cap::before{content:'';display:inline-block;width:12px;height:1px;background:var(--hair);
+  vertical-align:middle;margin-right:9px}
+
+/* ---- 10. 项目行：年份变边栏注（sticky）+ 悬挂标题点 ---- */
+.row{padding:66px 44px;border-top:1px solid var(--hair-2)}
+.row .yr{position:sticky;top:96px;font-size:22px;letter-spacing:.02em;
+  border-right:1px solid var(--hair-2);padding-right:20px}
+.row.txt .yr{font-size:20px}
+.row .yr .tg{margin-top:14px;font-size:9px;letter-spacing:.26em}
+.side h3{position:relative;font-size:clamp(22px,2vw,29px);letter-spacing:.005em}
+.side h3::before{content:'';position:absolute;left:-20px;top:.72em;width:8px;height:1px;
+  background:var(--clay)}
+.qt{padding-left:22px;border-left:2px solid rgba(158,58,38,.4)}
+ul.li li::before{content:'';position:absolute;left:0;top:.92em;width:7px;height:1px;
+  background:var(--chrome)}
+@media(max-width:1120px){.row .yr{position:static;border-right:0;padding-right:0}
+  .side h3::before{display:none}}
+
+/* ---- 11. 页脚 + 章节间隔：铬字 + 铬球 ---- */
+.foot h2{background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 1px rgba(255,255,255,.7))}
+.foot h2 a{color:inherit}
+@supports not (-webkit-background-clip:text){.foot h2{color:var(--ink);-webkit-text-fill-color:currentColor}}
+.foot .kick{font-size:9.5px;letter-spacing:.4em}
+
+/* ---- 12. 滚动淡入：加一点柔焦 ---- */
+.rv{transform:translateY(22px);filter:blur(3px);
+  transition:opacity 1.05s cubic-bezier(.2,.8,.2,1),transform 1.05s cubic-bezier(.2,.8,.2,1),filter .9s}
+.rv.in{filter:blur(0)}
+@media(prefers-reduced-motion:reduce){.rv{filter:none}}
+
 /* =========================================================================
    MOBILE FIX 2026-09-01 —— 首屏压字 / mini 导航触控 / 浮标遮挡
    本块必须保持在 style 末尾，靠顺序覆盖上面的移动端规则
@@ -1476,15 +1740,56 @@ ul.dlg li b{color:var(--faint)}
   .mini a.ml{padding:0 9px;font-size:11.5px}
 }
 
+/* ---- v4 EDITORIAL LAYER · 移动端收尾（必须在最后）---- */
+@media(max-width:820px){
+  .stats{padding:0 20px}
+  .st{padding:26px 14px 24px}
+  .st::before{margin-bottom:12px}
+  .row{padding:44px 20px}
+  .fx{padding-top:88px}
+  .fx-t{margin:52px 0 20px}
+  .flow>.stg{border-left:0;padding-left:0}
+  .fnode{border-left:0;border-right:0}
+  .qs{border-left:0}
+  .ph:hover{transform:none}
+  .hero{padding-bottom:76px}
+}
+
+/* ---- v4 EDITORIAL · 弱文字对比度收口（浅纸底上的小字）---- */
+.qs p,.mtb .mtn,.proto2 .mtn,.pli p,.plt em,.qlg span,.qi em,.qlb,.pf,.pf b,
+.ecd p,.fcard li,.mxr b,td.md,.nd p,.fnode span,.pmeta span,.psw span,.pswh,
+.tk b,.tkg em,.mtile b,.pm-ct,.pm-input span,ul.dlg li,.step span,.cap,
+.deep .skills span,.fchips span,.sh-tags span,.sk.g{color:#4f463f}
+.pli b,.pf b,.tk i{color:#6b6158}
+.qi em{background:rgba(255,253,250,.72);padding:5px 8px;border-radius:2px}
+.cap{color:#5b5249}
+.st span{color:#4f463f}
+.chapter .rl em{color:#5c534b}
+svg.dn .dnl{fill:#5c534b}
+.qd:after{color:#221d19}
+
 </style>
 </head>
-<body>
+<body class="locked">
+<div id="load">
+  <div class="lgrain"></div>
+  <div class="lnum" id="pct">00</div>
+  <img class="lfish" src="assets/v3-fish-cut.png" alt="">
+  <div class="lcap">秋刀想吃鱼 · LOADING</div>
+  <div class="lrule lr-t"></div>
+  <div class="lrule lr-b"></div>
+  <div class="lcorner lc-tl">VIVIENNE · 颜于涵</div>
+  <div class="lcorner lc-tr">PORTFOLIO / 2026</div>
+  <div class="lenter" id="lenter"><i></i><span>ENTER</span><em>点击进入</em></div>
+</div>
 <div class="bg-tex"></div>
 <img class="bg-orn o1" src="assets/v3-ornament.jpg" alt="">
 <img class="bg-orn o2" src="assets/v3-ornament.jpg" alt="">
 <div class="bg-veil"></div>
 <div class="grain"></div>
 <div class="cursor-glow" id="cg"></div>
+<div class="pgframe" aria-hidden="true"><i class="l"></i><i class="r"></i></div>
+<div class="spine" aria-hidden="true">Vivienne · 颜于涵 — Portfolio 2026</div>
 
 <!-- ============ sticky mini nav ============ -->
 <div class="mini" id="mini">
@@ -1539,6 +1844,11 @@ ul.dlg li b{color:var(--faint)}
   </div>
   <div class="scroll">Scroll<i></i></div>
   </div>
+  <div class="hlbl hl-tr">Portfolio &nbsp;/&nbsp; 2026</div>
+  <div class="hlbl hl-bl">AI Designer &nbsp;·&nbsp; 2 项发明专利 &nbsp;·&nbsp; 五年</div>
+  <div class="hlbl hl-br">PS / AI / PR · AE / C4D / CODING</div>
+  <div class="hero-deco2" aria-hidden="true"></div>
+  <div class="hmarq" aria-hidden="true"><div id="mq"></div></div>
 </section>
 
 <!-- ============ stats ============ -->
@@ -3062,5 +3372,43 @@ b.addEventListener('mouseenter',function(){pick(i);});b.addEventListener('click'
   tick();
 })();
 </script>
+<script>
+/* v4: 开场 loading 幕布 + 点击进入（取自 demo3，改为交互式揭幕） */
+(function(){
+  var box=document.getElementById('load');
+  if(!box) return;
+  var el=document.getElementById('pct'), n=0, done=false, opened=false;
+  function open(){
+    if(opened||!done) return;
+    opened=true;
+    box.classList.add('go');
+    document.body.classList.remove('locked');
+    setTimeout(function(){ box.style.display='none'; },1400);
+    window.dispatchEvent(new Event('resize'));
+  }
+  var t=setInterval(function(){
+    n+=Math.random()*11+4;
+    if(n>=100){ n=100; clearInterval(t); el.textContent='100';
+      setTimeout(function(){ done=true; box.classList.add('ready'); },340); }
+    el.textContent=String(Math.floor(n)).padStart(2,'0');
+  },90);
+  box.addEventListener('click',open);
+  box.addEventListener('touchend',function(e){ e.preventDefault(); open(); },{passive:false});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' ') open();
+  });
+})();
+/* v4: 首屏走马灯词条（与 demo3 一致） */
+(function(){
+  var mq=document.getElementById('mq');
+  if(!mq) return;
+  var items=['随变 AI · AI Designer','角色创建 · 四视图资产','成片 Agent','AI 写真','AI 风格化',
+    'BONDEE · 0-1 社交小世界','Meitu · AR 妆容','AI 双眼皮','StockPulse · 交易预警',
+    'ARCANA · 塔罗占卜 43 张自制牌面','厚涂 / C4D / 雕塑','2 项发明专利'];
+  var html=items.map(function(x){return '<span>'+x+'</span>';}).join('');
+  mq.innerHTML=html+html;
+})();
+</script>
+
 </body>
 </html>
