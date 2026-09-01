@@ -39,6 +39,7 @@ body{
 #glBack{position:absolute;inset:0;width:100%;height:100%;z-index:1;
   filter:blur(14px) saturate(1.04);transform:scale(1.07) translateY(-3%);opacity:.72}
 .hero{position:relative;width:100%;height:100vh;z-index:1}
+@supports (height:100dvh){.hero{height:100dvh}}
 #gl{position:absolute;inset:0;width:100%;height:100%;z-index:2}
 
 /* ── 开场：计数 + 幕布上移 ────────────────────── */
@@ -53,7 +54,7 @@ body{
 
 /* ── 排版层 ─────────────────────────────────── */
 .hui{position:absolute;inset:0;z-index:3;pointer-events:none}
-.hrule{position:absolute;background:var(--line)}
+.hrule{position:absolute;background:var(--line);padding:0;margin:0;box-sizing:border-box}
 .hrule.top{left:48px;right:48px;top:56px;height:1px}
 .hrule.bot{left:48px;right:48px;bottom:56px;height:1px}
 .hlb{position:absolute;font-size:10.5px;letter-spacing:.26em;color:#4a423a;text-transform:uppercase}
@@ -1520,7 +1521,7 @@ body.raw .lbx img.neg{filter:none}
   .fnode{min-width:0}
 
   /* --- 顶部 header --- */
-  .top{padding:22px 18px 0}
+  .top:not(.hrule){padding:22px 18px 0}
   .fish{width:74px}
   .top .rline{font-size:11px;letter-spacing:2px}
   .top .pill{margin-top:13px;padding:9px 22px;font-size:12px;letter-spacing:2.5px}
