@@ -2203,7 +2203,11 @@ ul.dlg li b{color:var(--faint)}
 
 .astage .ahint i{background:var(--clay);box-shadow:none}
 
-.acen .achar{filter:drop-shadow(0 22px 40px rgba(72,56,44,.34))}
+.acen .achar{filter:drop-shadow(0 14px 18px rgba(72,56,44,.16))}
+.acen::after{content:'';position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+  width:62%;height:34px;border-radius:50%;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%,rgba(72,56,44,.24),rgba(72,56,44,.07) 48%,transparent 72%);
+  filter:blur(11px)}
 
 .aglow{background:radial-gradient(circle,rgba(217,171,82,.20),rgba(217,171,82,.05) 45%,transparent 70%)}
 
@@ -2446,8 +2450,9 @@ svg.dn .dnl{fill:#5c534b}
   background:var(--hair-2)}
 .st:first-child{padding-left:0}
 .st:first-child::before{display:none}
-.st b{font-size:clamp(28px,4.3vw,62px);line-height:.94;letter-spacing:-.022em;
+.st b{font-size:clamp(28px,4.3vw,62px);line-height:.94;letter-spacing:-.022em;white-space:nowrap;
   transition:color .45s var(--eo)}
+.stats .st:nth-child(3) b{font-size:clamp(24px,3.15vw,46px);letter-spacing:-.035em}
 .st span{margin-top:14px;font-size:9px;letter-spacing:.24em;line-height:1.96}
 .st::after{content:'';position:absolute;left:22px;bottom:-22px;width:0;height:1px;
   background:var(--clay);transition:width .55s var(--eo)}
@@ -2616,6 +2621,7 @@ html.js:not(.touch) .astage,html.js:not(.touch) button{cursor:none}
   .st:first-child::before{display:block}
   .st::after,.st:hover::after{display:none}
   .st b{font-size:clamp(26px,8.6vw,40px)}
+  .stats .st:nth-child(3) b{font-size:clamp(30px,7.4vw,38px)}
   .st span{margin-top:9px;font-size:8.6px;letter-spacing:.18em}
   .row::before{left:20px;right:20px}
   .fx-meta{border-top:1px solid var(--hair-2)}
