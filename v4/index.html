@@ -589,6 +589,11 @@ td.md{font-size:11.5px;line-height:1.85;color:#a29d97;font-weight:200}
 
 .row.hasimg{min-height:430px}
 
+/* 两栏等高：行高由文字内容决定，图片内缩到与文字同一内容盒，底边与文字底边齐平 */
+.row.hasimg.eqh{min-height:0}
+.row.hasimg.eqh .rimg{top:62px;bottom:62px}
+@media(max-width:820px){.row.hasimg.eqh .rimg{top:0;bottom:0}}
+
 .row .rimg{position:absolute;right:0;top:0;bottom:0;width:auto;z-index:0;pointer-events:none}
 
 .row .rimg img{height:100%;width:auto;display:block;opacity:.95;
@@ -903,8 +908,11 @@ body.raw .ph.app{padding:0;background:#08090d}
 
 
 /* ---------- lightbox ---------- */
-.lbx{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:44px;
+.lbx{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:44px;
   background:rgba(3,3,4,.95);backdrop-filter:blur(6px)}
+
+/* lightbox 打开时：屏蔽顶部 mini nav 与页码 / 进度轨，避免遮挡大图 */
+body.lbx-open .mini,body.lbx-open .vpg,body.lbx-open .vrail{opacity:0!important;pointer-events:none!important}
 
 .lbx.on{display:flex;animation:fd .25s ease}
 
@@ -2478,15 +2486,21 @@ html.js .fx-kv.in{clip-path:inset(0 0 0 0)}
 .fx-kv .tagline{left:clamp(20px,3vw,44px);bottom:clamp(18px,2.4vw,34px);
   font-size:clamp(17px,2.3vw,32px);letter-spacing:.01em}
 
-/* 随变 AI KV（烛光暖金插画）：细金线画框 + 暖光外溢，把高密度画面桥接回暖纸底 */
+/* 随变 AI / AURREOL KV：四边羽化渐隐，融进暖纸底，去掉硬边金框，只在左下角保留柔和暗晕托住标语 */
 .fx-kv.ockv{margin-top:clamp(38px,4.6vw,60px);
-  border:1px solid rgba(217,171,82,.46);
-  box-shadow:0 0 74px 6px rgba(217,171,82,.24),0 26px 64px -40px rgba(74,38,22,.5)}
+  border:0;box-shadow:none;background:transparent}
 .fx-kv.ockv>img{width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;object-position:56% 40%;
-  transform:translateY(var(--plx,0px)) scale(1.045)}
+  transform:translateY(var(--plx,0px)) scale(1.045);
+  -webkit-mask-image:
+    linear-gradient(90deg,transparent 0,#000 13%,#000 87%,transparent 100%),
+    linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(90deg,transparent 0,#000 13%,#000 87%,transparent 100%),
+    linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%);
+  mask-composite:intersect}
 .fx-kv.ockv::after{background:
-  linear-gradient(180deg,rgba(32,20,14,.16),transparent 26%,rgba(30,19,13,.24) 60%,rgba(23,14,9,.78)),
-  radial-gradient(54% 48% at 6% 100%,rgba(20,12,8,.66),transparent 72%)}
+  radial-gradient(70% 66% at 12% 98%,rgba(20,12,8,.82),rgba(20,12,8,.32) 44%,transparent 72%)}
 .fx-kv.ockv .tagline{color:#fff7ea;text-shadow:0 2px 22px rgba(22,11,5,.85),0 1px 2px rgba(22,11,5,.7)}
 .fx-kv.ockv .tagline em{color:#f0cd88}
 @media(max-width:1120px){
@@ -2932,12 +2946,12 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
   <div class="cap rv" style="margin-top:10px"><i>◆</i>同一角色的多题材图像玩法</div>
   <div class="sub-t rv"><em>VIDEO</em><h4>视频玩法</h4><s></s></div>
   <div class="gr6 rv">
-    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-1-poster.jpg" controls playsinline><source src="../assets/oc/mv-1.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-2-poster.jpg" controls playsinline><source src="../assets/oc/mv-2.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-3-poster.jpg" controls playsinline><source src="../assets/oc/mv-3.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-4-poster.jpg" controls playsinline><source src="../assets/oc/mv-4.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-5-poster.jpg" controls playsinline><source src="../assets/oc/mv-5.mp4" type="video/mp4"></video></div></div>
-    <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-6-poster.jpg" controls playsinline><source src="../assets/oc/mv-6.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-1-poster.jpg" controls playsinline><source src="../assets/oc/mv-1.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-2-poster.jpg" controls playsinline><source src="../assets/oc/mv-2.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-3-poster.jpg" controls playsinline><source src="../assets/oc/mv-3.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-4-poster.jpg" controls playsinline><source src="../assets/oc/mv-4.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-5-poster.jpg" controls playsinline><source src="../assets/oc/mv-5.mp4" type="video/mp4"></video></div></div>
+    <div><div class="ph v"><video preload="none" poster="assets/oc/mv-6-poster.jpg" controls playsinline><source src="../assets/oc/mv-6.mp4" type="video/mp4"></video></div></div>
   </div>
   <div class="cap rv" style="margin-top:10px"><i>▶︎</i>基于分镜链路产出的视频作品</div>
 </section>
@@ -3050,7 +3064,7 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
 </div>
 
 
-<article class="row hasimg txt rv">
+<article class="row hasimg eqh txt rv">
   <div class="rimg" aria-hidden="true"><img src="../assets/style-hero.jpg" alt=""></div>
   <div class="yr">2024 — 2025<span class="tg">特效玩法 · S- 爆款</span></div>
   <div class="side">
@@ -3084,7 +3098,8 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
 </div>
 
 
-<article class="row txt rv">
+<article class="row hasimg txt rv">
+  <div class="rimg soft" aria-hidden="true"><img src="../assets/v4/music-cover.jpg" alt=""></div>
   <div class="yr">2024 — 2025<span class="tg">特效玩法 · S- 爆款</span></div>
   <div class="side">
     <h3>AI 音乐 · 「AI 我的新年单曲」<span class="arw">↗︎</span></h3>
@@ -3137,12 +3152,6 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
     <p class="tx">端内拉新完成度 <span class="n">900%</span>、DNU 环比 <span class="n">+28%</span>、主话题 VV <span class="n">3.1 亿</span>、累计拉新拉活 <span class="n">1500 万+</span>；口碑超越妙鸭等竞品；App Store 免费榜 <span class="n">73 → 17</span>。</p>
     <span class="kx">主要职责</span>
     <p class="tx">定义目标效果，从 0-1 跑通 AI 形象链路，主攻 <b>ID 保持</b>痛点，统筹数据打标、风格打磨与模型训练全流程。</p>
-    <ul class="li">
-      <li><b>用户相似度：</b>WebUI 搭建全链路，分身与风格 LoRA 分层优化，IP-Adapter 注入身份特征，配合 ControlNet 锁住长相。</li>
-      <li><b>写真风格：</b>聚焦胶片质感，还原色调与光圈，用效果突破换取新鲜感与传播力。</li>
-      <li><b>SOP 沉淀：</b>自研链路首次落地，沉淀真人 LoRA 制作标准与写真 SOP。</li>
-    </ul>
-    <div class="qt"><b>#这个胶片的杀伤力不亚于初恋</b>、<b>#看看你的AI美式学院照</b> 分别登上抖音挑战榜与热榜 <b>TOP1</b>，评论区跟风晒图持续带动跟投。</div>
   </div>
 </article>
 
@@ -3722,11 +3731,10 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
   <div class="cp">VIVIENNE · PORTFOLIO 2026 — ALL RIGHTS RESERVED</div>
 </footer>
 
-<div class="imode" id="imode"><i></i><span>IMAGE</span><b id="imodeTxt">融合</b></div>
-<div class="lbx" id="lbx"><button class="lbx-x" id="lbxX">✕</button><img id="lbxImg" src="" alt=""></div>
 
 </main>
 
+<div class="lbx" id="lbx"><button class="lbx-x" id="lbxX">✕</button><img id="lbxImg" src="" alt=""></div>
 <div class="vcur" id="vcur" aria-hidden="true"><i></i><b></b></div>
 <div class="vpg" id="vpg" aria-hidden="true"><em id="vpgN">01</em><s></s><span id="vpgT">05</span></div>
 <div class="vrail" id="vrail" aria-hidden="true"><b></b></div>
@@ -4202,24 +4210,15 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
     img.parentElement.addEventListener('click',function(){
       li.src=img.currentSrc||img.src;
       li.classList.toggle('neg',img.parentElement.classList.contains('neg'));
-      lbx.classList.add('on');document.body.style.overflow='hidden';});
+      lbx.classList.add('on');document.body.classList.add('lbx-open');document.body.style.overflow='hidden';});
   });
-  function close(){lbx.classList.remove('on');li.src='';document.body.style.overflow='';}
+  function close(){lbx.classList.remove('on');document.body.classList.remove('lbx-open');li.src='';document.body.style.overflow='';}
   document.getElementById('lbxX').addEventListener('click',close);
   lbx.addEventListener('click',function(e){if(e.target===lbx)close();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 
   var vs=[].slice.call(document.querySelectorAll('video'));
   vs.forEach(function(v){v.addEventListener('play',function(){vs.forEach(function(o){if(o!==v&&!o.paused)o.pause();});});});
-
-  var im=document.getElementById('imode'),imt=document.getElementById('imodeTxt');
-  var saved=localStorage.getItem('vv-img-mode');
-  if(saved==='raw')document.body.classList.add('raw'),imt.textContent='原图';
-  im.addEventListener('click',function(){
-    var raw=document.body.classList.toggle('raw');
-    imt.textContent=raw?'原图':'融合';
-    localStorage.setItem('vv-img-mode',raw?'raw':'soft');
-  });
 
 })();
 </script>
