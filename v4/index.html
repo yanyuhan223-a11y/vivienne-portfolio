@@ -2374,6 +2374,10 @@ svg.dn .dnl{fill:#5c534b}
 }
 
 /* ---------- 0. 通用：颗粒噪点纹（与首屏同一张） ---------- */
+/* 首屏 WebGL canvas 放大到 1.07，会横向溢出约 50px（有滚动条的桌面浏览器会出现横向滚动）。
+   只在 .hero 上做横向 clip：不动首屏任何标记/脚本，也不会创建滚动容器，
+   正文 position:sticky 不受影响（若加在 html/body 上用 hidden|clip 会让 sticky 失效）。 */
+.hero{overflow-x:clip}
 .pin-gr{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
   background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E")}
 
