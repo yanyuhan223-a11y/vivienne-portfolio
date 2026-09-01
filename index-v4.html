@@ -108,10 +108,7 @@ body{
 #load.ready{cursor:pointer}
 #load.ready .num{opacity:.16;transition:opacity .5s}
 #load.ready .cap{opacity:0;transition:opacity .4s}
-#load .lenter{position:absolute;left:50%;top:calc(50% + 104px);transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-  opacity:0;pointer-events:none;transition:opacity .7s .15s}
-#load.ready .lenter{opacity:1}
+#load .lenter{display:none}
 #load .lenter span{font-family:'Helvetica Neue',Arial,'PingFang SC',sans-serif;font-size:12px;
   letter-spacing:.42em;text-indent:.42em;color:var(--ink)}
 #load .lenter em{font-style:normal;font-family:'Helvetica Neue',Arial,'PingFang SC',sans-serif;
@@ -3429,7 +3426,7 @@ svg.dn .dnl{fill:#5c534b}
   var t=setInterval(function(){
     n+=Math.random()*11+4;
     if(n>=100){ n=100; clearInterval(t); el.textContent='100'; done=true;
-      setTimeout(function(){ box.classList.add('ready'); },260); }
+      setTimeout(open,420); }
     el.textContent=String(Math.floor(n)).padStart(2,'0');
   },90);
 })();
