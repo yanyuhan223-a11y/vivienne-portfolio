@@ -2713,8 +2713,6 @@ main.paper>.deep{
   .fx .idx,.pin .chapter .idx,.chapter .idx{line-height:1.75}
 }
 
-/* --- 4 段式流程图（笼中异色 STAGE 01-04）：只在宽屏改成 7 列，≤较窄时仍走原有单列规则 --- */
-@media(min-width:1121px){.flow.f4{grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr}}
 </style>
 <script>
 (function(){var d=document.documentElement;d.classList.add('js');
@@ -3008,6 +3006,60 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
     <div><div class="ph v"><video preload="none" poster="../assets/oc/mv-6-poster.jpg" controls playsinline><source src="../assets/oc/mv-6.mp4" type="video/mp4"></video></div></div>
   </div>
   <div class="cap rv" style="margin-top:10px"><i>▶︎</i>基于分镜链路产出的视频作品</div>
+  <div class="fx-t rv" id="chroma"><span>08</span><h3>分支实践 · 笼中异色 CHROMA IN THE CAGE</h3></div>
+  <p class="note rv">把「角色成立 → 资产沉淀 → 内容产出」这条链路搬进自己的项目里跑一遍：<b>7 天、6,338 行手写代码、零游戏引擎、零第三方素材库</b>，做出一部能玩到结局的《灵笼》同人视觉小说 Demo。</p>
+  <div class="fx-kv rv" style="margin-top:20px">
+    <img loading="lazy" src="../assets/galgame/kv.jpg" alt="笼中异色 · CHROMA IN THE CAGE 主视觉">
+    <div class="tagline">No record. No name. <em>No cage.</em></div>
+  </div>
+  <div class="mets rv" style="margin-top:20px">
+    <div class="met"><b>6,338</b><span>手写代码行 · 零框架</span></div>
+    <div class="met"><b>3</b><span>结局 · 双变量结算</span></div>
+    <div class="met"><b>5</b><span>处抉择 · 移动端竖屏</span></div>
+    <div class="met"><b>7 天</b><span>空仓库到可玩上线</span></div>
+  </div>
+  <div class="step rv" style="margin-top:22px"><span class="on">开场视频</span><i>→</i><span class="on">白光 · 眩晕</span><i>→</i><span class="on">第一视角摇杆探索</span><i>→</i><span class="on">遭遇与抉择</span><i>→</i><span class="on">结局与档案</span></div>
+  <div class="cds rv">
+    <div class="cd"><div class="n2">01</div><h5>素材全部自产</h5><p>立绘、六张表情头、场景与世界设定图全部 AI 生成后手动精修，用同一把风格锁保证跨图一致。</p></div>
+    <div class="cd"><div class="n2">02</div><h5>伪 Live2D 替身</h5><p>立绘拆成身体 + 六张表情头，JS 做呼吸、眨眼、视差与受击反馈，省掉一整个动画工种。</p></div>
+    <div class="cd"><div class="n2">03</div><h5>音乐用代码写</h5><p>BGM 由 Web Audio 实时合成，五层按场景切 7 组 preset；旁白走 TTS。零版权、零体积。</p></div>
+    <div class="cd"><div class="n2">04</div><h5>剧本即数据</h5><p>引擎只认 16 种节点，剧情是一个数组；最终选择 × 信任 × 关注度交叉结算出三个结局。</p></div>
+  </div>
+  <div class="sub-t rv" style="margin-top:44px"><em>IN GAME</em><h4>竖屏实机 · 从睁眼到抉择</h4><s></s></div>
+  <div class="gr4 rv">
+    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/fpv.jpg" alt="第一视角睁眼看手"></div><div class="cap"><i>◆</i>睁眼 · 先看见自己的手</div></div>
+    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/walk.jpg" alt="摇杆推进长廊"></div><div class="cap"><i>◆</i>推进 · 尽头站着一个人</div></div>
+    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/mark.jpg" alt="马克由远及近登场"></div><div class="cap"><i>◆</i>登场 · 伪 Live2D 呼吸与眨眼</div></div>
+    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/choice.jpg" alt="抉择分支"></div><div class="cap"><i>◆</i>抉择 · 选项即后果</div></div>
+  </div>
+  <div class="gr2 rv" style="margin-top:20px">
+    <div><div class="ph v"><video preload="none" controls playsinline poster="../assets/galgame/intro-poster.jpg"><source src="../assets/galgame/intro.mp4" type="video/mp4"></video></div><div class="cap"><i>▶︎</i>开场 · 画室最后一笔到坠入灯塔</div></div>
+    <div><div class="ph v"><video preload="none" controls playsinline poster="../assets/galgame/cut01-poster.jpg"><source src="../assets/galgame/cut01.mp4" type="video/mp4"></video></div><div class="cap"><i>▶︎</i>抉择后的情景过场</div></div>
+  </div>
+  <div class="sub-t rv" style="margin-top:40px"><em>WORLD</em><h4>先把世界画出来，再写词条</h4><s></s></div>
+  <div class="gr4 rv">
+    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-01.jpg" alt="地表玛娜生态与浮空灯塔"></div><div class="cap"><i>◆</i>地表玛娜生态与浮空灯塔</div></div>
+    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-05.jpg" alt="灯塔内部结构"></div><div class="cap"><i>◆</i>灯塔内部结构</div></div>
+    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-03.jpg" alt="成群小型变异兽"></div><div class="cap"><i>◆</i>成群小型变异兽</div></div>
+    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-06.jpg" alt="废弃秘密观测站"></div><div class="cap"><i>◆</i>废弃秘密观测站</div></div>
+  </div>
+  <div class="skills rv" style="margin-top:26px">
+    <span class="sk">原生 HTML / CSS / JS</span><span class="sk">16 种剧本节点</span><span class="sk">第一视角虚拟摇杆</span>
+    <span class="sk g">6 种情绪状态机</span><span class="sk g">7 组 BGM preset</span><span class="sk g">19 段 TTS 旁白</span><span class="sk g">竖屏视频模糊补底</span><span class="sk g">iOS 符号 VS15</span>
+  </div>
+  <div class="lproto rv">
+    <div class="lpph">
+      <div class="isl"></div>
+      <iframe src="https://yanyuhan223-a11y.github.io/linglong-galgame/" title="笼中异色 · 可玩 Demo" loading="lazy" allow="autoplay; fullscreen"></iframe>
+    </div>
+    <div class="lpx">
+      <span class="kx">PLAY IT</span>
+      <h4>这台手机里是完整的第一章</h4>
+      <p>点<b>「进入马克的世界」</b>就会从开场视频一路跑到结局，第一视角探索、五次抉择、三个结局与结局档案都是活的。右上角 <b>SOUND</b> 开声音更好——BGM 是运行时合成的，不是音频文件。</p>
+      <a class="lpbtn" href="https://yanyuhan223-a11y.github.io/linglong-galgame/" target="_blank" rel="noopener">在新窗口打开完整 Demo ↗︎</a>
+    </div>
+  </div>
+  <p class="note rv" style="margin-top:20px">→ <a href="https://github.com/yanyuhan223-a11y/linglong-galgame" target="_blank" rel="noopener" style="color:#ff3b3b;border-bottom:1px solid rgba(255,59,59,.5)">GitHub 源码仓库</a>　（非商业同人练习作品，《灵笼》世界观与角色版权归原作方所有）</p>
 </section>
 
 
@@ -3403,213 +3455,12 @@ window.__vv={f:[],add:function(fn){this.f.push(fn);}};})();
 <section class="chapter" id="other">
   <div class="idx rv">04 — PERSONAL</div>
   <div class="hl rv"><h2>Coding &amp; Art</h2><div class="rule"></div></div>
-  <div class="rl rv"><span>SIDE QUESTS</span><em>副本 / 手作</em><em>游戏 · 工具 · 短片 · 绘画 · 3D · 雕塑</em></div>
-  <p class="sm rv">从 0 到 1 的独立产品、同人游戏 Demo、工程化提效工具、AI 漫画短片，以及厚涂绘画、拼贴、C4D 建模与雕塑等长期积累的审美训练。这些是我保持手感与好奇心的方式。</p>
+  <div class="rl rv"><span>SIDE QUESTS</span><em>副本 / 手作</em><em>工具 · 短片 · 绘画 · 3D · 雕塑</em></div>
+  <p class="sm rv">从 0 到 1 的独立产品、工程化提效工具、AI 漫画短片，以及厚涂绘画、拼贴、C4D 建模与雕塑等长期积累的审美训练。这些是我保持手感与好奇心的方式。</p>
 </section>
     </div>
   </div>
 </div>
-
-<!-- ============ FEATURED CASE · 笼中异色 CHROMA IN THE CAGE ============ -->
-<section class="fx" id="chroma">
-  <div class="idx rv">PERSONAL · GAME DESIGN × CODING — 2026</div>
-  <div class="bcr rv"><span>Personal</span><i>/</i><span>0 → 1 同人游戏 Demo</span><i>/</i><b>视觉小说 · 沉浸式交互</b></div>
-  <h2 class="rv">笼中异色 · CHROMA IN THE CAGE</h2>
-  <p class="one rv">一部能从头玩到结局的《灵笼》同人视觉小说 —— 不用游戏引擎、不用第三方素材库，6,300 行手写代码，把我自己的 OC 放进别人的世界观里，跑出三个结局。</p>
-
-  <div class="fx-meta rv">
-    <div><span>ROLE</span><b>独立设计 + 编码实现 · 1 人全流程</b></div>
-    <div><span>TIMELINE</span><b>2026.09 · 7 天 · 19 次提交</b></div>
-    <div><span>SCOPE</span><b>剧本 / 角色 / 视觉 / 交互 / 音频 / 前端实现</b></div>
-    <div><span>STACK</span><b>原生 HTML / CSS / JS · Web Audio · AI 生图与生视频 · 零框架</b></div>
-  </div>
-
-  <div class="fx-kv rv">
-    <img src="../assets/galgame/kv.jpg" alt="笼中异色 · CHROMA IN THE CAGE 主视觉">
-    <div class="tagline">No record. No name. <em>No cage.</em></div>
-  </div>
-
-  <div class="fx-3 rv">
-    <div>
-      <span class="kx">挑战</span>
-      <p>同人 Galgame 最容易翻车的地方不是画面，是<b>「玩起来像个半成品」</b>：点进去只有几句对话、一张立绘、没有结局。而我一个人，既没有游戏引擎经验，也没有配音和音乐。</p>
-    </div>
-    <div>
-      <span class="kx">解法</span>
-      <p>把范围砍到<b>一章 · 五次抉择 · 三个结局</b>，但每一环都做完整；再用「伪 Live2D + 程序化合成音乐 + TTS 旁白」这套<b>替身方案</b>，补掉一个人做不了的工种。</p>
-    </div>
-    <div>
-      <span class="kx">我做了什么</span>
-      <p>写剧本与世界观词条、生成全部素材、手写一套<b>剧本驱动的 VN 引擎</b>，并把主流程重排成移动端竖屏优先 —— 包括一段第一视角摇杆探索。</p>
-    </div>
-  </div>
-
-  <div class="mets rv">
-    <div class="met"><b>6,338</b><span>手写代码行数 · 零框架</span></div>
-    <div class="met"><b>3</b><span>结局 · 由两个变量结算</span></div>
-    <div class="met"><b>5</b><span>处抉择 · 126 句台词</span></div>
-    <div class="met"><b>7 天</b><span>从空仓库到可玩上线</span></div>
-  </div>
-
-  <div class="fx-t rv"><span>01</span><h3>先决定「在手机上竖着玩」</h3></div>
-  <p class="note rv">Galgame 的默认形态是 16:9 横屏。但我想让人在<b>微信里点开链接就能玩</b>，所以一开始就按竖屏排主流程：立绘固定在左侧、对话框贴底、抉择做成可点的大按钮，横版视频不裁切而是<b>用同一支视频的模糊放大版补上下</b>。</p>
-  <div class="flow f4 rv">
-    <div class="stg">
-      <div class="no">STAGE 01</div>
-      <h4>穿越开场</h4>
-      <div class="en">Fall</div>
-      <ul>
-        <li>画室最后一笔 → 画布裂开紫色缝隙 → 坠入</li>
-        <li>结尾一道刺眼白光，不做黑屏切场</li>
-      </ul>
-    </div>
-    <div class="arw2">→</div>
-    <div class="stg">
-      <div class="no">STAGE 02</div>
-      <h4>第一视角探索</h4>
-      <div class="en">Explore</div>
-      <ul>
-        <li>白光散尽先看见自己的手，再抬头看回廊</li>
-        <li>推左下摇杆一步步往深处走，途中三次停顿</li>
-      </ul>
-    </div>
-    <div class="arw2">→</div>
-    <div class="stg">
-      <div class="no">STAGE 03</div>
-      <h4>正片与抉择</h4>
-      <div class="en">Descent</div>
-      <ul>
-        <li>双立绘同框、手电探索、噬极兽遭遇</li>
-        <li>五次抉择改写信任与关注度两条线</li>
-      </ul>
-    </div>
-    <div class="arw2">→</div>
-    <div class="stg">
-      <div class="no">STAGE 04</div>
-      <h4>三结局与档案</h4>
-      <div class="en">Chroma</div>
-      <ul>
-        <li>结算后进片尾讲述，TTS 旁白逐行推进</li>
-        <li>解锁结局档案，本地存档记住走过的路</li>
-      </ul>
-    </div>
-  </div>
-  <div class="step rv"><span class="on">开场视频</span><i>→</i><span class="on">白光 · 眩晕</span><i>→</i><span class="on">第一视角推进</span><i>→</i><span class="on">遭遇与抉择</span><i>→</i><span class="on">结局与档案</span></div>
-
-  <div class="sub-t rv"><em>IN GAME</em><h4>竖屏实机 · 从睁眼到抉择</h4><s></s></div>
-  <div class="gr4 rv">
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/fpv.jpg" alt="第一视角睁眼看手"></div><div class="cap"><i>◆</i>睁眼 · 先看见自己的手</div></div>
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/walk.jpg" alt="摇杆推进长廊"></div><div class="cap"><i>◆</i>推进 · 尽头站着一个不动的人</div></div>
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/mark.jpg" alt="马克由远及近登场"></div><div class="cap"><i>◆</i>登场 · 伪 Live2D 的呼吸与眨眼</div></div>
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/choice.jpg" alt="抉择分支"></div><div class="cap"><i>◆</i>抉择 · 双立绘同框，选项即后果</div></div>
-  </div>
-
-  <div class="fx-t rv"><span>02</span><h3>探索段返工三次，才让「陌生」这件事成立</h3></div>
-  <p class="note rv">穿越到一个陌生世界，最重要的一分钟是<b>玩家自己也不知道这是哪</b>。前两版我都把这一分钟做丢了——第一版让主角在画面里横向跑，第二版让马克直接冲过来，都太快、太像游戏关卡。</p>
-  <div class="flow rv">
-    <div class="stg">
-      <div class="no">V1</div>
-      <h4>第三视角跑动</h4>
-      <div class="en">Side Scroll</div>
-      <ul>
-        <li>OC 在画面里横向跑，摄影机跟着平移</li>
-        <li>看着像横版闯关，玩家变成旁观者</li>
-      </ul>
-    </div>
-    <div class="arw2">→</div>
-    <div class="stg">
-      <div class="no">V2</div>
-      <h4>改第一视角</h4>
-      <div class="en">First Person</div>
-      <ul>
-        <li>OC 不再入镜，摄影机就是玩家的眼睛</li>
-        <li>但马克「冲」过来，紧张感变成了突兀</li>
-      </ul>
-    </div>
-    <div class="arw2">→</div>
-    <div class="stg">
-      <div class="no">V3</div>
-      <h4>把节奏刻意放慢</h4>
-      <div class="en">Slow Down</div>
-      <ul>
-        <li>满推摇杆也要 9 秒，中途三次强制停顿</li>
-        <li>先白光眩晕、再抬手、再扶墙，最后才遇见人</li>
-      </ul>
-    </div>
-  </div>
-  <div class="skills rv">
-    <span class="sk">左下虚拟摇杆 · 0.16 死区</span><span class="sk">慢走不是跑</span><span class="sk">右下手电按钮</span>
-    <span class="sk g">走路镜头晃动</span><span class="sk g">纵深物件按距离浮现</span><span class="sk g">白光→白雾两段退场</span><span class="sk g">重影 / 打转 / 耳鸣圈 / 心跳暗角</span>
-  </div>
-  <div class="gr2 rv" style="margin-top:22px">
-    <div><div class="ph v"><video preload="metadata" controls playsinline poster="../assets/galgame/intro-poster.jpg"><source src="../assets/galgame/intro.mp4" type="video/mp4"></video></div><div class="cap"><i>▶︎</i>开场 · 画室最后一笔到坠入灯塔</div></div>
-    <div><div class="ph v"><video preload="metadata" controls playsinline poster="../assets/galgame/cut01-poster.jpg"><source src="../assets/galgame/cut01.mp4" type="video/mp4"></video></div><div class="cap"><i>▶︎</i>抉择后的情景过场 · 同框与紫电</div></div>
-  </div>
-
-  <div class="fx-t rv"><span>03</span><h3>引擎与剧本分离 · 加一段剧情不用改一行引擎</h3></div>
-  <p class="note rv">这是整个项目里最省时间的一个决定：剧情不写在代码逻辑里，而是写成<b>一串节点数据</b>。引擎只认 16 种节点类型，剧本负责说「演什么」。后面每天改剧情，都没有再碰过引擎。</p>
-  <div class="arch rv">
-    <div class="nd"><div class="dot"></div><b>剧本即数据</b><p><code>say / char / bg / fx / hud / choice / video / end</code> 等 16 种节点，剧情是一个数组</p></div>
-    <div class="nd"><div class="dot"></div><b>双变量状态机</b><p>trust 信任与 expose 关注度贯穿全章，任何节点都能挂条件，不满足就整条跳过</p></div>
-    <div class="nd"><div class="dot"></div><b>演出层解耦</b><p>粒子 / 闪光 / 震动 / Glitch / 手电 / 速度线全在 fx 层，剧本只发指令</p></div>
-    <div class="nd"><div class="dot"></div><b>本地存档</b><p>进度、变量与已解锁结局写进 localStorage，档案页直接读它显示实时读数</p></div>
-  </div>
-  <div class="skills rv">
-    <span class="sk">16 种节点类型</span><span class="sk">条件节点 cond</span><span class="sk">label / goto / if 跳转</span>
-    <span class="sk g">4 种粒子预设 dust / spore / ash / volt</span><span class="sk g">AUTO · SKIP · SAVE · LOAD</span><span class="sk g">空格推进 / Ctrl 快进 / Esc 返回</span>
-  </div>
-
-  <div class="fx-t rv"><span>04</span><h3>五次抉择 · 两个变量结算出三个结局</h3></div>
-  <p class="note rv">结局不是最后一道选择题决定的。<b>最终选择 × 信任 × 关注度</b>三者交叉才出结果——同一句「带我回灯塔」，信任不够就会掉进「样本」结局。每次抉择右上角都会飘一条变化提示，让玩家看见自己攒下来的东西。</p>
-  <div class="cds rv">
-    <div class="cd"><div class="n2">A</div><h5>名册 · THE ROSTER</h5><p>马克替你担保，灯塔给了一个编外编号 R-0000。你终于被写下来了——代价是从此有人管得着你。</p></div>
-    <div class="cd"><div class="n2">B</div><h5>样本 · THE SPECIMEN</h5><p>关注度太高、信任太薄。没人替你说话，于是你没被写进名册，被写进了研究序列。</p></div>
-    <div class="cd"><div class="n2">C</div><h5>无名 · THE UNNAMED</h5><p>你留在了地面。名册上永远没有你——所以谁也没办法把你划掉。</p></div>
-    <div class="cd"><div class="n2">◆</div><h5>把「没有编号」写成主题</h5><p>第一幕里它是指认你的罪证，第三幕里变成噬极兽看不见你的唯一原因。三个结局其实是同一个问句的三个答案。</p></div>
-  </div>
-  <div class="gr4 rv">
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/torch.jpg" alt="手电探索"></div><div class="cap"><i>◆</i>第二幕 · 手电扫过一副骨头</div></div>
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/danger.jpg" alt="噬极兽遭遇"></div><div class="cap"><i>◆</i>遭遇 · 腥红危险脉冲与镜头震动</div></div>
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/archive.jpg" alt="结局档案"></div><div class="cap"><i>◆</i>结局档案 · 走过的路会被记下来</div></div>
-    <div><div class="ph app"><img loading="lazy" src="../assets/galgame/shots/title.jpg" alt="马克互动档案页"></div><div class="cap"><i>◆</i>进场 · 马克的互动档案页</div></div>
-  </div>
-
-  <div class="fx-t rv"><span>05</span><h3>一个人做完一部 Demo · 四个替身方案</h3></div>
-  <p class="note rv">缺的不是灵感，是工种：动画师、作曲、配音、美术。每一项我都换了一个<b>用代码或 AI 顶上去</b>的做法——不是为了省事，而是因为一个人只能这样才能把它做完。</p>
-  <div class="cds rv">
-    <div class="cd"><div class="n2">01</div><h5>伪 Live2D 代替 Live2D</h5><p>把立绘拆成身体 + 六张表情头，用 JS 做呼吸缩放、随机眨眼、鼠标视差与受击反馈。表情用「原图像素 + 羽化融合」生成，除表情外每根头发都和原立绘一致。</p></div>
-    <div class="cd"><div class="n2">02</div><h5>BGM 用 Web Audio 实时合成</h5><p>不引一首第三方音乐：pad / bass / arp / perc / wind 五层按场景切 7 组 preset，跨场景交叉淡入淡出。零版权、零体积，还能跟着剧情紧张度自动换。</p></div>
-    <div class="cd"><div class="n2">03</div><h5>片尾旁白用 TTS 顶配音</h5><p>19 段中文旁白由系统 TTS 生成，播放时自动压低 BGM，语音播完自动进下一句。最后一句刻意<b>只留字幕不配音</b>——留白比读出来更重。</p></div>
-    <div class="cd"><div class="n2">04</div><h5>世界观先画出来再写</h5><p>先用 AI 生成六张设定图把玛娜生态、灯塔结构、变异兽定下来，再回头写词条与台词。有了画面，文字就不会各说各话。</p></div>
-  </div>
-  <div class="sub-t rv"><em>WORLD BUILDING</em><h4>世界设定图 · 先定画面再写词条</h4><s></s></div>
-  <div class="gr4 rv">
-    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-01.jpg" alt="地表玛娜生态与浮空灯塔"></div><div class="cap"><i>◆</i>地表玛娜生态与浮空灯塔</div></div>
-    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-05.jpg" alt="灯塔内部结构"></div><div class="cap"><i>◆</i>灯塔内部结构</div></div>
-    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-03.jpg" alt="成群小型变异兽"></div><div class="cap"><i>◆</i>成群小型变异兽</div></div>
-    <div><div class="ph"><img loading="lazy" src="../assets/galgame/world-06.jpg" alt="废弃秘密观测站"></div><div class="cap"><i>◆</i>废弃秘密观测站</div></div>
-  </div>
-  <div class="skills rv" style="margin-top:16px">
-    <span class="sk">6 种情绪状态机</span><span class="sk">7 组 BGM preset</span><span class="sk">19 段 TTS 旁白</span>
-    <span class="sk g">全程程序化音效</span><span class="sk g">竖屏视频模糊补底</span><span class="sk g">iOS 符号加 VS15 防彩色 emoji</span>
-  </div>
-
-  <div class="fx-t rv"><span>06</span><h3>可以直接玩</h3></div>
-  <div class="lproto rv">
-    <div class="lpph">
-      <div class="isl"></div>
-      <iframe src="https://yanyuhan223-a11y.github.io/linglong-galgame/" title="笼中异色 · 可玩 Demo" loading="lazy" allow="autoplay; fullscreen"></iframe>
-    </div>
-    <div class="lpx">
-      <span class="kx">PLAY IT</span>
-      <h4>这台手机里是完整的第一章</h4>
-      <p>点<b>「进入马克的世界」</b>就会从开场视频一路跑到结局：第一视角探索、五次抉择、三个结局与结局档案都是活的。左上身份卡、右上源质读数、中下那句台词也都能点。</p>
-      <p>开场约 15 秒，可以随时 SKIP；右上角 <b>SOUND</b> 开声音更好——BGM 是运行时合成出来的，不是音频文件。</p>
-      <a class="lpbtn" href="https://yanyuhan223-a11y.github.io/linglong-galgame/" target="_blank" rel="noopener">在新窗口打开完整 Demo ↗︎</a>
-    </div>
-  </div>
-  <p class="note rv" style="margin-top:22px">→ <a href="https://github.com/yanyuhan223-a11y/linglong-galgame" target="_blank" rel="noopener" style="color:#ff3b3b;border-bottom:1px solid rgba(255,59,59,.5)">GitHub 源码仓库</a>　（非商业同人练习作品，《灵笼》世界观与角色版权归原作方所有）</p>
-</section>
 
 <!-- ============ FEATURED CASE · StockPulse ============ -->
 <section class="fx" id="stockpulse">
